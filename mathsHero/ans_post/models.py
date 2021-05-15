@@ -10,7 +10,7 @@ class Post(models.Model):
     )
     
     description = models.TextField()
-    cover = models.ImageField(upload_to='uploads/%Y/%m/%d')
+    # image = models.ImageField(upload_to='uploads/%Y/%m/%d')
     # categories = models.ManyToManyField(Category, related_name='posts')
 
     # meta information
