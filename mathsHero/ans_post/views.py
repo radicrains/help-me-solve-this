@@ -8,4 +8,7 @@ import uuid
 
 @api_view(['GET'])
 def view_index(request):
-    return Response({'message': 'it works'})
+    # return Response({'message': 'it works'})
+    if request.method == 'GET':
+        posts = POST.objects.all()
+        serializer = PostSerializer
