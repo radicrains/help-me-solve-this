@@ -28,7 +28,7 @@ class Question(models.Model):
     description = models.TextField()
     # ImageField needs pillow to run
     cover = models.ImageField(upload_to='uploads/%Y/%m/%d')
-    categories = models.ManyToManyField(Category, related_name='c_questions')
+    categories = models.ManyToManyField(Category, related_name='questions')
 
     # meta information
     created_at = models.DateTimeField(auto_now_add=True)
