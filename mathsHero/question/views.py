@@ -35,12 +35,12 @@ def view_index(request):
                 question.categories.add(cat)
     #
 
-            return redirect('questions: questions_index')
+            return redirect('questions:questions_index')
     
     questions = Question.objects.all()
     context = {"form": form, "questions": questions}
     
-    return render(request, 'questions/index.html', context)
+    return render(request, 'question/index.html', context)
 
 
 # @login_required

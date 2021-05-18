@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}All questions::{% endblock title %}
+
+{% block body %}
+{% if request.user.is_superuser %}
+Only Admins can see this
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            {% comment %} Form {% endcomment %}
+
+            <form action="{% url 'questions:questions_index'%}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="row mb-3">
+
+                    {{field.label_tag}}
+                    {{field}}
+                    <div class="text-danger">
+                        {{field.errors}}
+                    </div>
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="form-row mt-3">
+                    <button type="submit" class="btn btn-primary">
+                        Add question
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                {% for question in questions %}
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        {% if question.cover  %}
+                        <img src="{{question.cover.url}}" class="card-img-top" />
+                        {% endif %}
+
+                        <div class="card-body">
+                            <p class="card-title">
+                                {{question.title}}
+                            </p>
+                            {% comment %} <p class="card-text">
+                                {{question.price}}
+                            </p> {% endcomment %}
+                            {% comment %} <a class="card-link btn btn-primary" href="{% url 'questions:question_show' question.id %}">Show</a> {% endcomment %}
+
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="alert alert-warning">
+                    No questions yet
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
