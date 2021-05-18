@@ -13,8 +13,9 @@ def view_index(request):
     # return Response({'message': 'it works'})
 
     #if GET request to show all the posts
-    # if request.method == 'GET':
-        
+    if request.method == 'GET':
+        posts = Post.objects.all()
+        serializer = PostSerializer(posts, many = True)
     
     #else if POST request, to save the input post.
     if request.method == 'POST':
@@ -26,6 +27,6 @@ def view_index(request):
             print(post.errors)
             # return Response({'message': 'Post is saved!'})
 
-    posts = Post.objects.all()
-    serializer = PostSerializer(posts, many = True)
+    # posts = Post.objects.all()
+    # serializer = PostSerializer(posts, many = True)
     return Response(serializer.data)

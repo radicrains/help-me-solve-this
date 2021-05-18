@@ -9,7 +9,7 @@ from rest_framework import exceptions
 
 # Create your views here.
 @api_view(['POST'])
-@permission_classes([AllowAny]) #allow anyone to view
+@permission_classes([AllowAny]) # allow anyone to view
 def register_view(request):
     if request.method == 'POST':
         user = UserSerializer(data=request.data)
@@ -29,22 +29,22 @@ def login_view(request):
         username = request.data.get('username')
         password = request.data.get('password')
 
-        #exceptions helps to just return error rather than stop the server (or break to code).
-        #if no username or password, it will show U & P is required
+        # exceptions helps to just return error rather than stop the server (or break to code).
+        # if no username or password, it will show U & P is required
         if(username is None) or (password is None):
             raise exceptions.AuthenticationFailed('Username or Password is required')
         
-        #this is custom method for validation (can also be used for email validation)
-        #filter the user objects by matching username and "get" the first item on the list
+        # this is custom method for validation (can also be used for email validation)
+        # filter the user objects by matching username and "get" the first item on the list
         user = User.objects.filter(username = username).first()
 
-        #check for the right username & password
+        # check for the right username & password
         if user is None:
             raise exceptions.AuthenticationFailed('User is not found')
         if not user.check_password(password):
             raise exceptions.AuthenticationFailed('Password is not a match')
         
-        #if both username & password correct, serialized user to pass data
+        # if both username & password correct, serialized user to pass data
         serialized_user = UserSerializer(user).data
 
         # delete password from dict / serialized_user
