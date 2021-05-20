@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}{{question.title | capfirst}}::{% endblock title %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <img src="{{question.cover.url}}" />
+            <h3>{{question.title | capfirst}}</h3>
+
+            {% for cat in question.categories.all %}
+            <li>{{cat.name}}</li>
+            {% endfor %}
+            <p>{{question.description}}</p>
+
+            <a href="{% url 'questions:question_show' question.id %}?action=edit">Edit</a>
+            <a href="{% url 'questions:question_show' question.id %}?action=del">Delete</a>
+
+            <div>
+                {% comment %} <h2> Reviews</h2>
+                <form id="add_review" action="{% url 'reviews:review_create' book.id %}" method="post">
+                    {% csrf_token %}
+                    <div>
+                        {{review_form.name}}
+                    </div>
+                    <div>
+                        {{review_form.review}}
+                    </div>
+                    <button type="submit">Add Review</button>
+                </form> {% endcomment %}
+
+
+                {% comment %} <div id="reviews"></div> {% endcomment %}
+
+                {% comment %} <div>
+                    {% for r in book.reviews.all %}
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <img src="https://randomuser.me/api/portraits/thumb/lego/5.jpg" alt="">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h3> {{r.book.title}}</h3>
+                            {{r.review}}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div> {% endcomment %}
+            </div>
+        </div>
+        {% if edit %}
+        <div class="col-md-6">
+            <form action="{% url 'questions:question_show' question.id %}?action=edit" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form}}
+                <button>Edit Book</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}
+
+{% comment %} 
+{% block scripts %}
+
+<script>
+    //1st get all reviews
+    getReviews()
+
+    document.querySelector("#add_review").addEventListener("submit", function (e) {
+        //prevent form from submitting
+        e.preventDefault()
+        const formData = new FormData(e.target);
+
+        //{{book.id}} is from django
+        fetch("/reviews/{{book.id}}", {
+                method: "post",
+                body: JSON.stringify({
+                    "name": formData.get('name'),
+                    "review": formData.get('review')
+                })
+            })
+            .then(res => res.json())
+            .then(result => {
+                document.querySelector("#add_review").reset()
+                getReviews()
+            })
+
+    })
+
+    function getReviews() {
+        fetch("/reviews/{{book.id}}")
+            .then(res => res.json())
+            .then(result => {
+                console.log(result)
+
+                const reviews_holder = document.querySelector("#reviews")
+                //clear container 
+                reviews_holder.innerHTML = ""
+                let containerDiv, descDiv
+
+                result.forEach(ele => {
+                    containerDiv = document.createElement("div")
+                    containerDiv.classList.add("d-flex", "align-items-center", "mb-3")
+                    descDiv = document.createElement("div")
+                    descDiv.classList.add("flex-grow-1", "ms-3")
+                    let titleH1 = document.createElement("h1")
+                    let imgDiv = document.createElement("div")
+                    imgDiv.classList.add("flex-shrink-0")
+                    let img = document.createElement("img")
+                    img.src = "https://randomuser.me/api/portraits/thumb/lego/5.jpg"
+
+                    imgDiv.appendChild(img)
+
+                    containerDiv.appendChild(imgDiv)
+
+
+                    titleH1.appendChild(document.createTextNode(ele.name))
+                    descDiv.appendChild(titleH1)
+                    descDiv.appendChild(document.createTextNode(ele.review))
+                    containerDiv.appendChild(descDiv)
+                    //replace with new data
+                    reviews_holder.appendChild(containerDiv)
+
+                })
+
+
+
+
+                /**<div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <img src="https://randomuser.me/api/portraits/thumb/lego/5.jpg" alt="">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h3> {{r.book.title}}</h3>
+                                {{r.review}}
+                            </div>
+                        </div>
+                        */
+
+            })
+    }
+</script>
+{% endblock scripts %} {% endcomment %}

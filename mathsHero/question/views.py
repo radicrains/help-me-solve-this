@@ -44,43 +44,44 @@ def view_index(request):
 
 
 # @login_required
-# def view_show(request, pk):
-#     try:
-#         book = Book.objects.get(pk=pk)
-#     except Book.DoesNotExist:
-#         return redirect('books:books_index')
+def view_show(request, pk):
+    try:
+        question = Question.objects.get(pk=pk)
+    except Question.DoesNotExist:
+        return redirect('questions:questions_index')
 
-#     """
-#         Only hits this when the url has ?action=del and a GET request
-#     """
-#     if request.GET.get('action') == 'del':
-#         book.delete()
-#         return redirect('books:books_index')
+    """
+        Only hits this when the url has ?action=del and a GET request
+    """
+    if request.GET.get('action') == 'del':
+        question.delete()
+        return redirect('questions:questions_index')
 
-#     """
-#         Only hits this when the url has ?action=edit and a POST request
-#     """
+    """
+        Only hits this when the url has ?action=edit and a POST request
+    """
 
-#     if request.method == 'POST' and request.GET['action'] == 'edit':
-#         print("i am here")
-#         form = BookForm(request.POST, request.FILES, instance=book)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('books:book_show', book.id)
+    if request.method == 'POST' and request.GET['action'] == 'edit':
+        print("i am here")
+        form = QuestionForm(request.POST, request.FILES, instance=question)
+        if form.is_valid():
+            form.save()
+            return redirect('questions:question_show', question.id)
 
-#     """
-#         Only hits this when the url has ?action=edit and a GET request
-#         this will display the form.
-#     """
-#     if request.GET.get('action') == 'edit':
-#         form = BookForm(instance=book)
-#         context = {"book": book, "edit": True, "form": form}
-#         return render(request, 'books/show.html', context)
+    """
+        Only hits this when the url has ?action=edit and a GET request
+        this will display the form.
+    """
+    if request.GET.get('action') == 'edit':
+        form = QuestionForm(instance=question)
+        context = {"question": question, "edit": True, "form": form}
+        return render(request, 'question/show.html', context)
 
-#     review_form = ReviewForm()
-#     print(review_form)
-#     context = {"book": book, "edit": False, "review_form": review_form}
-#     return render(request, 'books/show.html', context)
+    # review_form = ReviewForm()
+    # print(review_form)
+    # context = {"question": question, "edit": False, "review_form": review_form}
+    context = {"question": question, "edit": False}
+    return render(request, 'question/show.html', context)
 
 
 # @login_required
