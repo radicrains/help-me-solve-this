@@ -2,6 +2,9 @@ from django.db import models
 import uuid
 
 from django.urls.base import reverse
+from django.db import models
+from cloudinary.models import CloudinaryField
+
 # Create your models here.
 
 
@@ -27,7 +30,8 @@ class Question(models.Model):
     # published_year = models.IntegerField(null=False)
     description = models.TextField()
     # ImageField needs pillow to run
-    cover = models.ImageField(upload_to='uploads/%Y/%m/%d')
+    # cover = models.ImageField(upload_to='uploads/%Y/%m/%d')
+    cover = CloudinaryField('image')
     categories = models.ManyToManyField(Category, related_name='questions')
 
     # meta information
