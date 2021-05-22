@@ -46,6 +46,9 @@ Only Admins can see this
                             <p class="card-title">
                                 {{question.title}}
                             </p>
+                            <p class="card-title">
+                                {{question.categories}}
+                            </p>
                             <a class="card-link btn btn-primary" href="{% url 'questions:question_show' question.id %}">Show</a>
 
                         </div>
