@@ -47,5 +47,12 @@ def login_view(request):
         else:
             messages.error(request, "username or password is incorrect")
             return render(request, "accounts/login.html")
-            
+
     return render(request, "accounts/login.html")
+
+
+def logout_view(request):
+    logout(request)
+    
+    #NOTETOSELF - REDIRECT TO HOME PAGE
+    return redirect('accounts:login')
