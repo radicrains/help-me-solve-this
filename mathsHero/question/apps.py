@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AnsPostConfig(AppConfig):
+class QuestionConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'ans_post'
+    name = 'question'

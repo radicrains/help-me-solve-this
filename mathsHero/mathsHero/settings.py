@@ -15,6 +15,10 @@ import os
 from dotenv import load_dotenv, find_dotenv
 from datetime import timedelta
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,8 +42,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'ans_post',
-    'accounts',
+    'question',
+    # 'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -99,8 +103,8 @@ ROOT_URLCONF = 'mathsHero.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+       'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -185,3 +189,9 @@ MEDIA_URL = 'media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+cloudinary.config( 
+  cloud_name = os.environ.get("cloudinary_cloud_name"), 
+  api_key = os.environ.get("cloudinary_api_key"), 
+  api_secret = os.environ.get("cloudinary_api_secret") 
+)
