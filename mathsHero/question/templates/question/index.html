@@ -10,8 +10,6 @@ Only Admins can see this
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            {% comment %} Form {% endcomment %}
-
             <form action="{% url 'questions:questions_index'%}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
@@ -48,9 +46,6 @@ Only Admins can see this
                             <p class="card-title">
                                 {{question.title}}
                             </p>
-                            {% comment %} <p class="card-text">
-                                {{question.price}}
-                            </p> {% endcomment %}
                             <a class="card-link btn btn-primary" href="{% url 'questions:question_show' question.id %}">Show</a>
 
                         </div>

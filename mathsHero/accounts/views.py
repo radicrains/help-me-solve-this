@@ -20,7 +20,6 @@ def register_view(request):
         try:
             pass
             user = User.objects.create_user(username, email, password)
-            # ebere2 AbstractUser
             profile = Profile(user=user)
             profile.save()
         except IntegrityError:
@@ -30,5 +29,5 @@ def register_view(request):
         login(request, user)
         return redirect("questions:questions_index")
     else:
-        form = UserCreationForm()  # django form inbuilt
+        form = UserCreationForm()
         return render(request, "accounts/register.html", {"form": form})
