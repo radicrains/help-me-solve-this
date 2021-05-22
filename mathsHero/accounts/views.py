@@ -31,3 +31,21 @@ def register_view(request):
     else:
         form = UserCreationForm()
         return render(request, "accounts/register.html", {"form": form})
+
+
+def login_view(request):
+    #
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect("questions:questions_index")
+        else:
+            messages.error(request, "username or password is incorrect")
+            return render(request, "accounts/login.html")
+            
+    return render(request, "accounts/login.html")
