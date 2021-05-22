@@ -1,27 +1,35 @@
-from django.shortcuts import render
-from django.contrib.auth import get_user_model
+# from accounts.models import User, Profile
+from django.shortcuts import render, redirect
+from django.contrib.auth import get_user_model, login, logout, authenticate
+from django.contrib import messages
+from django.db import IntegrityError
+from django.contrib.auth.forms import UserCreationForm
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from accounts.serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework import exceptions
+from rest_framework import exceptions,Request
+
+# from django.http import HttpRequest
+# from rest_framework.request import Request
 
 # Create your views here.
-@api_view(['POST'])
+# @api_view(['POST'])
 @permission_classes([AllowAny]) # allow anyone to view
 def register_view(request):
     if request.method == 'POST':
         user = UserSerializer(data=request.data)
         if user.is_valid():
             user.save()
-            return Response({ 'message': 'user registered!'})
-        else:
-            return Response({ 'message': 'user not registered!'})
+            # return Response({ 'message': 'user registered!'})
+            return render(request, "accounts/login.html")
+        
+    return render(request, "accounts/register.html")
 
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
+# @api_view(['POST'])
+# @permission_classes([AllowAny])
 def login_view(request):
     if request.method == 'POST':
         User = get_user_model()
@@ -41,8 +49,10 @@ def login_view(request):
         # check for the right username & password
         if user is None:
             raise exceptions.AuthenticationFailed('User is not found')
+            return render(request, "accounts/login.html")
         if not user.check_password(password):
             raise exceptions.AuthenticationFailed('Password is not a match')
+            return render(request, "accounts/login.html")
         
         # if both username & password correct, serialized user to pass data
         serialized_user = UserSerializer(user).data
@@ -53,11 +63,12 @@ def login_view(request):
         # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/creating_tokens_manually.html
         refresh = RefreshToken.for_user(user)
 
-        return Response({
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-            'user': serialized_user
-        })
+        # return Response({
+        #     'refresh': str(refresh),
+        #     'access': str(refresh.access_token),
+        #     'user': serialized_user
+        # })
+        return render(request, "questions/questions_index.html")
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated]) #only allow authenticated users to view

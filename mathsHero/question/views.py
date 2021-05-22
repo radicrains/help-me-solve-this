@@ -4,12 +4,12 @@
 from question.models import *
 from question.forms import *
 from django.shortcuts import redirect, render
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 import uuid
 # Create your views here.
 
 
-# @login_required
+@login_required
 def view_index(request):
     form = QuestionForm()
     if request.method == 'POST':
