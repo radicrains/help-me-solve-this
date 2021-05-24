@@ -12,10 +12,10 @@ class Category(models.Model):
         primary_key=True,
         default=uuid.uuid4,
         editable=False)
-    category = models.CharField(max_length=200, null=False)
+    name = models.CharField(max_length=200, null=False)
 
     def __str__(self):
-        return self.category
+        return self.name
 
 
 class Question(models.Model):
@@ -28,10 +28,10 @@ class Question(models.Model):
     # ImageField needs pillow to run
     # cover = models.ImageField(upload_to='uploads/%Y/%m/%d')
     cover = CloudinaryField('image')
-    user = models.ForeignKey(User, related_name='user_posts', on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, related_name='user_posts', on_delete=models.CASCADE)
    
-    # categories = models.ManyToManyField(Category, related_name='questions')
-    categories = models.ForeignKey(Category, related_name='name', on_delete=models.CASCADE)
+    categories = models.ManyToManyField(Category, related_name='category_name')
+    # categories = models.ForeignKey(Category, related_name='category_name', on_delete=models.CASCADE)
 
     # meta information
     created_at = models.DateTimeField(auto_now_add=True)
@@ -44,10 +44,3 @@ class Question(models.Model):
         return reverse("question_show", kwargs={"pk": self.pk})
 
 
-# class Series(models.Model):
-#     id = models.UUIDField(  # new
-#         primary_key=True,
-#         default=uuid.uuid4,
-#         editable=False)
-#     name = models.CharField(max_length=50)
-#     book = models.ForeignKey(Book, on_delete=models.CASCADE)

@@ -17,10 +17,7 @@ def view_index(request):
         if form.is_valid():
 
             question = Question(title=request.POST['title'],
-                        # author=request.POST['author'],
-                        # price=request.POST['price'],
                         description=request.POST['description'], 
-                        # published_year=request.POST['published_year'],
                         cover=request.FILES['cover'])
 
             question.save()
