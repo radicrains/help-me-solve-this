@@ -34,6 +34,7 @@ def view_index(request):
     questions = Question.objects.all()
     context = {"form": form, "questions": questions}
     
+     # posts = Post.objects.filter(hidden=False).order_by('-created_at')
     return render(request, 'question/index.html', context)
 
 

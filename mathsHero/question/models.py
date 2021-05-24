@@ -1,8 +1,7 @@
 from django.db import models
 import uuid
-
-from django.urls.base import reverse
-from django.db import models
+from accounts.models import *
+# from django.urls.base import reverse
 from cloudinary.models import CloudinaryField
 
 # Create your models here.
@@ -13,10 +12,10 @@ class Category(models.Model):
         primary_key=True,
         default=uuid.uuid4,
         editable=False)
-    name = models.CharField(max_length=200, null=False)
+    category = models.CharField(max_length=200, null=False)
 
     def __str__(self):
-        return self.name
+        return self.category
 
 
 class Question(models.Model):
@@ -25,14 +24,14 @@ class Question(models.Model):
         default=uuid.uuid4,
         editable=False)
     title = models.CharField(max_length=200, null=False)
-    # author = models.CharField(max_length=200, null=False)
-    # price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
-    # published_year = models.IntegerField(null=False)
     description = models.TextField()
     # ImageField needs pillow to run
     # cover = models.ImageField(upload_to='uploads/%Y/%m/%d')
     cover = CloudinaryField('image')
-    categories = models.ManyToManyField(Category, related_name='questions')
+    user = models.ForeignKey(User, related_name='user_posts', on_delete=models.CASCADE)
+   
+    # categories = models.ManyToManyField(Category, related_name='questions')
+    categories = models.ForeignKey(Category, related_name='name', on_delete=models.CASCADE)
 
     # meta information
     created_at = models.DateTimeField(auto_now_add=True)
