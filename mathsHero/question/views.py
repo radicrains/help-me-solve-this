@@ -31,7 +31,6 @@ def view_index(request):
     questions = Question.objects.all()
     context = {"form": form, "questions": questions}
     
-     # posts = Post.objects.filter(hidden=False).order_by('-created_at')
     return render(request, 'question/index.html', context)
 
 
@@ -65,3 +64,7 @@ def view_show(request, pk):
     context = {"question": question, "edit": False}
     return render(request, 'question/show.html', context)
 
+
+
+#filter_view
+# categories = Category.objects.filter(question=question.id).order_by('-created_at')
