@@ -14,18 +14,20 @@ Only Admins can see this
                 {% csrf_token %}
 
                 {% for field in form %}
-                <div class="row mb-3">
+                    <div class="row mb-3">
 
-                    {{field.label_tag}}
-                    {{field}}
-                    <div class="text-danger">
-                        {{field.errors}}
+                        {{field.label_tag}}
+                        {{field}}
+                        <div class="text-danger">
+                            {{field.errors}}
+                        </div>
+                        {% if field.help_text %}
+                            <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+
                     </div>
-                    {% if field.help_text %}
-                    <p class="help">{{ field.help_text|safe }}</p>
-                    {% endif %}
-                </div>
                 {% endfor %}
+                
                 <div class="form-row mt-3">
                     <button type="submit" class="btn btn-primary">
                         Add question

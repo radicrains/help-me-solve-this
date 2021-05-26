@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{category_form.as_p}}
+
+    <button type="submit">Add Category</button>
+</form>
+
+{% endblock body %}

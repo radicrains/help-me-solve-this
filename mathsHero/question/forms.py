@@ -24,11 +24,22 @@ class QuestionForm(forms.ModelForm):
             }),
             'cover': forms.FileInput(attrs={
                 'class': 'form-control',
-            })
+            }),
+            'user': forms.HiddenInput(),
         }
+        exclude = ('user',)
 
 
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = '__all__'
+
+        # widgets = {
+        #     'name': forms.TextInput(attrs={
+        #         'class': 'form-control',
+        #         'placeholder': 'Create New Category'
+        #     }),
+        #     'question': forms.HiddenInput(),
+        # }
+        # exclude = ('question',)
