@@ -1,9 +1,9 @@
 from accounts.models import User, Profile
 from django.shortcuts import render, redirect
-from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 def home_view(request):
     return render(request, 'accounts/home.html')
@@ -25,6 +25,7 @@ def register_view(request):
             user = User.objects.create_user(username, email, password)
             profile = Profile(user=user)
             profile.save()
+
         except IntegrityError:
             messages.error(request, "Username is taken already")
             return render(request, 'accounts/register.html')
@@ -32,6 +33,7 @@ def register_view(request):
         login(request, user)
         messages.success(request, "Registration successful." )
         return redirect("accounts:user_login")
+
     else:
         messages.error(request, "Unsuccessful registration. Invalid information.")
         form = UserCreationForm()
