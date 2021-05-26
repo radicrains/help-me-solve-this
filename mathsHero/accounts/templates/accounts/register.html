@@ -1,13 +1,18 @@
 {% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
 <h1>Registration<h1>
         <div class="container">
-
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="row">
+                {% comment %} {{form|crispy}} {% endcomment %}
+                {{form.email|as_crispy_field}}
+                {{form.username|as_crispy_field}}
+                {{form.password|as_crispy_field}}
+                {{form.password_confirm|as_crispy_field}}
+                {% comment %} <div class="row">
                     <div class="col-md-6">
                         <label>Email</label>
                         <input type="text" class="form-control" name="email">
@@ -27,11 +32,10 @@
                         <label>Password confirm</label>
                         <input type="password" class="form-control" name="password_confirm">
                     </div>
-                </div>
+                </div> {% endcomment %}
                 <button class="btn btn-primary">Register</button>
                 <p class="text-center">If you already have an account, <a href="{% url 'accounts:user_login'%}">login</a> instead.</p>
             </form>
-
         </div>
 
 {% endblock content %}
