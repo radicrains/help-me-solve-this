@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 import uuid
 # Create your views here.
 
-
 @login_required
 def view_index(request):
     form = QuestionForm()

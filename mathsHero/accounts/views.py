@@ -5,6 +5,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from django.contrib.auth.forms import UserCreationForm
 
+def home_view(request):
+    return render(request, 'accounts/home.html')
+
 def register_view(request):
     if request.method == "POST":
         email = request.POST['email']
@@ -27,8 +30,10 @@ def register_view(request):
             return render(request, 'accounts/register.html')
 
         login(request, user)
-        return redirect("questions:questions_index")
+        messages.success(request, "Registration successful." )
+        return redirect("accounts:user_login")
     else:
+        messages.error(request, "Unsuccessful registration. Invalid information.")
         form = UserCreationForm()
         return render(request, "accounts/register.html", {"form": form})
 
@@ -52,6 +57,6 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    
+    messages.info(request, "You have successfully logged out.")
     #NOTETOSELF - REDIRECT TO HOME PAGE
     return redirect('accounts:login')
