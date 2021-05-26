@@ -24,8 +24,10 @@ class QuestionForm(forms.ModelForm):
             }),
             'cover': forms.FileInput(attrs={
                 'class': 'form-control',
-            })
+            }),
+            'user': forms.HiddenInput(),
         }
+        exclude = ('user',)
 
 
 class CategoryForm(forms.ModelForm):
