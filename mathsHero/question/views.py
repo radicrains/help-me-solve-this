@@ -66,20 +66,22 @@ def view_show(request, pk):
     return render(request, 'question/show.html', context)
 
 
-# @login_required
-# def view_category_create(request):
+@login_required
+def view_category_create(request):
 
-#     category_form = CategoryForm()
-#     if request.method == 'POST':
-#         category_form = CategoryForm(request.POST)
-#         if category_form.is_valid():
-#             category_form.save()
-#             return redirect('questions:questions_index')
-#     context = {"category_form": category_form}
-#     return render(request, 'question/category.html', context)
+    category_form = CategoryForm()
+    if request.method == 'POST':
+        category_form = CategoryForm(request.POST)
+        if category_form.is_valid():
+            category = Category(name=request.POST['name'])
+
+            category_form.save()
+            return redirect('questions:questions_index')
+    context = {"category_form": category_form}
+    return render(request, 'question/category.html', context)
 
 
-#filter_view
+# filter_view
 # categories = Category.objects.filter(question=question.id).order_by('-created_at')
 
 # def view_category_filter(request, pk):
