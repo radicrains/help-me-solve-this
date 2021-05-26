@@ -54,7 +54,7 @@
             <form action="{% url 'questions:question_show' question.id %}?action=edit" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form}}
-                <button>Edit Book</button>
+                <button>Edit</button>
             </form>
         </div>
         {% endif %}
