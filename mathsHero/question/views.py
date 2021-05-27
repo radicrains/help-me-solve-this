@@ -12,19 +12,22 @@ import uuid
 def view_index(request):
     form = QuestionForm()
     if request.method == 'POST':
+
         form = QuestionForm(request.POST, request.FILES)
         if form.is_valid():
 
-            question = Question(title=request.POST['title'],
+            question = Question(
+                        title=request.POST['title'],
                         description=request.POST['description'], 
                         cover=request.FILES['cover'],
                         user=request.user)
 
             question.save()
             categories = form.cleaned_data['categories']
-
-            # for cat in categories:
-            #     question.categories.add(cat)
+            
+            # question.categories.add(*categories)
+            for cat in categories:
+                question.categories.add(cat)
 
             return redirect('questions:questions_index')
     
