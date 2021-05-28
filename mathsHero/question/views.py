@@ -10,7 +10,9 @@ import uuid
 
 @login_required
 def view_index(request):
+    
     form = QuestionForm()
+    
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES)
         if form.is_valid():
@@ -19,17 +21,26 @@ def view_index(request):
                         description=request.POST['description'], 
                         cover=request.FILES['cover'],
                         user=request.user)
-
             question.save()
-            categories = form.cleaned_data['categories']
 
+            categories = form.cleaned_data['categories']
             for cat in categories:
                 question.categories.add(cat)
 
             return redirect('questions:questions_index')
     
-    questions = Question.objects.all()
-    context = {"form": form, "questions": questions}
+    #filter qn by category selection
+    questions = Question.objects.all() 
+    filtered_cat = request.GET.get("category_filter") 
+
+    if filtered_cat != '' and filtered_cat is not None: 
+        questions = questions.filter(categories=filtered_cat) 
+
+    # questions = Question.objects.all() 
+    categories = Category.objects.all() 
+
+    context = {"form": form, "questions":questions, "categories":categories} 
+    # context = {"form": form, "categories":categories, "queryset":qs} 
     
     return render(request, 'question/index.html', context)
 

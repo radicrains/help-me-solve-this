@@ -7,15 +7,15 @@ from cloudinary.models import CloudinaryField
 # Create your models here.
 
 
-# class Category(models.Model):
-#     id = models.UUIDField(  # new
-#         primary_key=True,
-#         default=uuid.uuid4,
-#         editable=False)
-#     name = models.CharField(max_length=200, null=False)
+class Category(models.Model):
+    id = models.UUIDField(  # new
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False)
+    name = models.CharField(max_length=200, null=False)
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
 
 
 class Question(models.Model):
@@ -30,7 +30,7 @@ class Question(models.Model):
     cover = CloudinaryField('image')
     user = models.ForeignKey(User, default='', related_name='user_posts', on_delete=models.CASCADE)
    
-    # categories = models.ManyToManyField(Category, related_name='category_name')
+    categories = models.ManyToManyField(Category, related_name='category_name')
 
     # meta information
     created_at = models.DateTimeField(auto_now_add=True)
@@ -43,13 +43,13 @@ class Question(models.Model):
         return reverse("question_show", kwargs={"pk": self.pk})
 
 
-class Category(models.Model):
-    id = models.UUIDField(  # new
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False)
-    name = models.CharField(max_length=200, null=True)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+# class Category(models.Model):
+#     id = models.UUIDField(  # new
+#         primary_key=True,
+#         default=uuid.uuid4,
+#         editable=False)
+#     name = models.CharField(max_length=200, null=True)
+#     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
