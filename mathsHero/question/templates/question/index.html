@@ -10,6 +10,16 @@ Only Admins can see this
 <div class="container">
     <div class="row">
         <div class="col-md-3">
+
+            <form action="{% url 'questions:questions_index'%}" method="get">
+                <label for="category">Category</label>
+                <select name="category">
+                    {% for cat in categories %}
+                        <option value="cat" />{{cat}}</option>
+                    {% endfor %}
+                <input type="submit" name="category" value="Filter" />
+            </form>
+
             <form action="{% url 'questions:questions_index'%}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 

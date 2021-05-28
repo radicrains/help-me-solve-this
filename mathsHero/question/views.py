@@ -23,8 +23,8 @@ def view_index(request):
             question.save()
             categories = form.cleaned_data['categories']
 
-            # for cat in categories:
-            #     question.categories.add(cat)
+            for cat in categories:
+                question.categories.add(cat)
 
             return redirect('questions:questions_index')
     
