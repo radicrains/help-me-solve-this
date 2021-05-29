@@ -43,13 +43,29 @@ class Question(models.Model):
         return reverse("question_show", kwargs={"pk": self.pk})
 
 
-# class Category(models.Model):
-#     id = models.UUIDField(  # new
-#         primary_key=True,
-#         default=uuid.uuid4,
-#         editable=False)
-#     name = models.CharField(max_length=200, null=True)
-#     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+class Answer(models.Model):
+    id = models.UUIDField(  # new
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False)
+    
+    name = models.ForeignKey(User, related_name="answers_user",
+                             on_delete=models.DO_NOTHING)
+    # ans_cover = CloudinaryField('image')
+    answer = models.TextField(null=True)
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name='answers_qn')
 
-#     def __str__(self):
-#         return self.name
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": {
+                "username": self.name.username
+            },
+            "answer": self.answer,
+            "question": {
+                "title": self.question.title,
+                'id': self.question.id
+                # "categories": self.question.categories
+            }
+        }
