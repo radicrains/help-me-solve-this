@@ -19,34 +19,35 @@
             <a href="{% url 'questions:question_show' question.id %}?action=del">Delete</a>
 
             <div>
-                {% comment %} <h2> Reviews</h2>
-                <form id="add_review" action="{% url 'reviews:review_create' book.id %}" method="post">
+                <h2> Answer </h2>
+                <form id="add_answers" action="{% url 'answers:ans_create' question.id %}" method="post">
                     {% csrf_token %}
                     <div>
-                        {{review_form.name}}
+                        {{answers_form.ans_description}}
                     </div>
                     <div>
-                        {{review_form.review}}
+                        {{answers_form.ans_cover}}
                     </div>
-                    <button type="submit">Add Review</button>
-                </form> {% endcomment %}
+                    <button type="submit">Add Answer</button>
+                </form> 
 
 
-                {% comment %} <div id="reviews"></div> {% endcomment %}
+                <div id="reviews"></div>
 
-                {% comment %} <div>
-                    {% for r in book.reviews.all %}
+                <div>
+                    {% for r in question.answer.all %}
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
                             <img src="https://randomuser.me/api/portraits/thumb/lego/5.jpg" alt="">
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h3> {{r.book.title}}</h3>
-                            {{r.review}}
+                            <h3> {{r.question.title}}</h3>
+                            {{r.answer}}
                         </div>
                     </div>
                     {% endfor %}
-                </div> {% endcomment %}
+                </div> 
+
             </div>
         </div>
         {% if edit %}
