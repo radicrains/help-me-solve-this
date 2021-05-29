@@ -3,6 +3,7 @@
 
 from question.models import *
 from question.forms import *
+from answers.forms import *
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 import uuid
@@ -68,10 +69,10 @@ def view_show(request, pk):
         context = {"question": question, "edit": True, "form": form}
         return render(request, 'question/show.html', context)
 
-    # review_form = ReviewForm()
-    # print(review_form)
-    # context = {"question": question, "edit": False, "review_form": review_form}
-    context = {"question": question, "edit": False}
+    answers_form = AnswerForm()
+    print(answers_form)
+    context = {"question": question, "edit": False, "answers_form": answers_form}
+    # context = {"question": question, "edit": False}
     return render(request, 'question/show.html', context)
 
 
