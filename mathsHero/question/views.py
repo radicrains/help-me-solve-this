@@ -36,11 +36,9 @@ def view_index(request):
     if filtered_cat != '' and filtered_cat is not None: 
         questions = questions.filter(categories=filtered_cat) 
 
-    # questions = Question.objects.all() 
+    
     categories = Category.objects.all() 
-
     context = {"form": form, "questions":questions, "categories":categories} 
-    # context = {"form": form, "categories":categories, "queryset":qs} 
     
     return render(request, 'question/index.html', context)
 
