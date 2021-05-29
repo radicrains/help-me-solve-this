@@ -14,8 +14,8 @@ class Answer(models.Model):
     
     name = models.ForeignKey(User, related_name="answers",
                              on_delete=models.DO_NOTHING)
-    cover = CloudinaryField('image')
-    description = models.TextField()
+    ans_cover = CloudinaryField('image')
+    ans_description = models.TextField(null=True)
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name='answers')
 
