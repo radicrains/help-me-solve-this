@@ -51,8 +51,8 @@ class Answer(models.Model):
     
     name = models.ForeignKey(User, related_name="answers_user",
                              on_delete=models.DO_NOTHING)
-    # ans_cover = CloudinaryField('image')
     answer = models.TextField(null=True)
+    ansimg = CloudinaryField('image')
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name='answers_qn')
 
@@ -62,7 +62,10 @@ class Answer(models.Model):
             "user": {
                 "username": self.name.username
             },
-            "answer": self.answer,
+            "answer": {
+                "answer":self.answer,
+                "ansimg":self.ansimg
+            },
             "question": {
                 "title": self.question.title,
                 'id': self.question.id
