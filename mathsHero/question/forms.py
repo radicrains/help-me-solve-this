@@ -53,3 +53,26 @@ class CategoryForm(forms.ModelForm):
     # widgets = {
     #     'name': forms.Select(choices=filtered_cat)
     # }
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = '__all__'
+        exclude = ('name', 'question',)
+
+        widgets = {
+            # 'name': forms.TextInput(attrs={
+            #     'class': 'form-control',
+            #     'placeholder': 'Name'
+            # }),
+            'answer': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Describe your answers here...'
+            }),
+            # 'ans_cover': forms.FileInput(attrs={
+            #     'class': 'form-control',
+            # }),
+            # 'question': forms.Select(attrs={
+            #     'class': 'form-control'
+            # })
+        }
