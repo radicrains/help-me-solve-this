@@ -35,7 +35,7 @@ def view_index(request):
 
     if filtered_cat != '' and filtered_cat is not None: 
         print(filtered_cat)
-        questions = questions.filter(categories=filtered_cat) 
+        questions = questions.filter(categories__name=filtered_cat) 
 
     
     categories = Category.objects.all() 
@@ -89,12 +89,3 @@ def view_category_create(request):
     context = {"category_form": category_form}
     return render(request, 'question/category.html', context)
 
-
-# filter_view
-# categories = Category.objects.filter(question=question.id).order_by('-created_at')
-
-# def view_category_filter(request, pk):
-#     try:
-#         category = Category.objects.get(pk=pk)
-#     except Category.DoesNotExist:
-#         return redirect('questions:questions_index')
