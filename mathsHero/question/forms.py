@@ -43,3 +43,13 @@ class CategoryForm(forms.ModelForm):
         #     'question': forms.HiddenInput(),
         # }
         # exclude = ('question',)
+
+# class FiltercatForm(forms.ModelForm):
+#     model = Category
+#     fields = name
+    
+    
+    
+    # widgets = {
+    #     'name': forms.Select(choices=filtered_cat)
+    # }

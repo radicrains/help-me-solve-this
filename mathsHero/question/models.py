@@ -28,7 +28,7 @@ class Question(models.Model):
     # ImageField needs pillow to run
     # cover = models.ImageField(upload_to='uploads/%Y/%m/%d')
     cover = CloudinaryField('image')
-    user = models.ForeignKey(User, default='', related_name='user_posts', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, default='', null=True, related_name='user_posts', on_delete=models.CASCADE)
    
     categories = models.ManyToManyField(Category, related_name='category_name')
 

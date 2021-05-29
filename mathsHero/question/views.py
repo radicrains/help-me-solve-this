@@ -34,6 +34,7 @@ def view_index(request):
     filtered_cat = request.GET.get("category_filter") 
 
     if filtered_cat != '' and filtered_cat is not None: 
+        print(filtered_cat)
         questions = questions.filter(categories=filtered_cat) 
 
     
