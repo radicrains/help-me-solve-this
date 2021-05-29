@@ -35,7 +35,7 @@ def register_view(request):
         return redirect("accounts:user_login")
 
     else:
-        messages.error(request, "Unsuccessful registration. Invalid information.")
+        # messages.error(request, "Unsuccessful registration. Invalid information.")
         form = UserCreationForm()
         return render(request, "accounts/register.html", {"form": form})
 
@@ -61,4 +61,4 @@ def logout_view(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     #NOTETOSELF - REDIRECT TO HOME PAGE
-    return redirect('accounts:login')
+    return redirect('accounts:user_login')

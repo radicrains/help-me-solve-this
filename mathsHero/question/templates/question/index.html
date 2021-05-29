@@ -2,7 +2,9 @@
 
 {% block title %}All questions::{% endblock title %}
 
+
 {% block body %}
+
 {% if request.user.is_superuser %}
 Only Admins can see this
 {% endif %}
@@ -10,6 +12,17 @@ Only Admins can see this
 <div class="container">
     <div class="row">
         <div class="col-md-3">
+
+            <form action="{% url 'questions:questions_index'%}" method="GET">
+                <label for="category_filter">Category</label>
+                <select name="category_filter">
+                        <option value =''/>All</option>
+                    {% for cat in categories %}
+                        <option value={{cat}} />{{cat}}</option>
+                    {% endfor %}
+                <input type="submit" />
+            </form>
+
             <form action="{% url 'questions:questions_index'%}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 

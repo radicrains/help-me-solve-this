@@ -6,7 +6,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-
             <img src="{{question.cover.url}}" />
             <h3>{{question.title | capfirst}}</h3>
 
@@ -15,40 +14,11 @@
             {% endfor %}
             <p>{{question.description}}</p>
 
-            <a href="{% url 'questions:question_show' question.id %}?action=edit">Edit</a>
-            <a href="{% url 'questions:question_show' question.id %}?action=del">Delete</a>
-
-            <div>
-                {% comment %} <h2> Reviews</h2>
-                <form id="add_review" action="{% url 'reviews:review_create' book.id %}" method="post">
-                    {% csrf_token %}
-                    <div>
-                        {{review_form.name}}
-                    </div>
-                    <div>
-                        {{review_form.review}}
-                    </div>
-                    <button type="submit">Add Review</button>
-                </form> {% endcomment %}
-
-
-                {% comment %} <div id="reviews"></div> {% endcomment %}
-
-                {% comment %} <div>
-                    {% for r in book.reviews.all %}
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <img src="https://randomuser.me/api/portraits/thumb/lego/5.jpg" alt="">
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h3> {{r.book.title}}</h3>
-                            {{r.review}}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div> {% endcomment %}
-            </div>
+            <a href="{% url 'questions:question_show' question.id %}?action=edit" class="btn btn-primary btn-sm">Edit</a>
+            <a href="{% url 'questions:question_show' question.id %}?action=del" class="btn btn-primary btn-sm">Delete</a>
+            <a href="{% url 'questions:question_answer' question.id %}" class="btn btn-primary btn-sm">Answer</a>
         </div>
+        
         {% if edit %}
         <div class="col-md-6">
             <form action="{% url 'questions:question_show' question.id %}?action=edit" method="post" enctype="multipart/form-data">
@@ -58,6 +28,23 @@
             </form>
         </div>
         {% endif %}
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+        {% for ans in answers %}
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    <img src="https://randomuser.me/api/portraits/thumb/lego/5.jpg" alt="">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h3> {{ans.name.username}}</h3>
+                    {{ans.answer}}
+                    <img src="{{ans.ansimg.url}}" />
+                </div>
+            </div>
+        {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock body %}
