@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}{{question.title | capfirst}}::{% endblock title %}
+
+{% block body %}
+
+
+    <div class="col-md-6">
+        <form action="{% url 'questions:question_answer' question.id %}" method="post">
+            {% csrf_token %}
+            {% for field in answer_form %}
+            <div class="row mb-3 ">
+
+                {{field.label_tag}}
+                {{field}}
+                <div class="text-danger">
+                    {{field.errors}}
+                    {{ form.non_field_errors }}
+                </div>
+                {% if field.help_text %}
+                <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary btn-sm">Answer</button>
+        </form>
+    </div>
+    
+{% endblock body %}
