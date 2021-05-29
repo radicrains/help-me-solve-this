@@ -18,7 +18,7 @@
             <a href="{% url 'questions:question_show' question.id %}?action=edit">Edit</a>
             <a href="{% url 'questions:question_show' question.id %}?action=del">Delete</a>
 
-            <div>
+            {% comment %} <div>
                 <h2> Answer </h2>
                 <form id="add_answers" action="{% url 'answers:ans_create' question.id %}" method="post">
                     {% csrf_token %}
@@ -48,7 +48,7 @@
                     {% endfor %}
                 </div> 
 
-            </div>
+            </div> {% endcomment %}
         </div>
         {% if edit %}
         <div class="col-md-6">
