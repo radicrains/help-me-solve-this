@@ -69,9 +69,9 @@ class AnswerForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Describe your answers here...'
             }),
-            # 'ans_cover': forms.FileInput(attrs={
-            #     'class': 'form-control',
-            # }),
+            'ansimg': forms.FileInput(attrs={
+                'class': 'form-control',
+            }),
             # 'question': forms.Select(attrs={
             #     'class': 'form-control'
             # })

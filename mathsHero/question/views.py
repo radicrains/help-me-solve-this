@@ -105,11 +105,12 @@ def view_answers_create(request, pk):
     answer_form = AnswerForm()
     
     if request.method=='POST':
-        answer_form = AnswerForm(request.POST)
+        answer_form = AnswerForm(request.POST, request.FILES)
         if answer_form.is_valid():
             # answer = Answer.objects.create(name=request.user.name,answer=answer, question=question)
             answer = Answer(name=request.user,
                             answer=request.POST['answer'],
+                            ansimg=request.FILES['ansimg'],
                             question=question)
             answer.save()
 
