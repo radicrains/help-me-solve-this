@@ -3,7 +3,7 @@
 
 from question.models import *
 from question.forms import *
-# from answers.models import *
+from answers.models import *
 # from answers.forms import *
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
