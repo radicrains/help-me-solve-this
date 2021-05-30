@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Qn::{% endblock title %}
+
+
+{% block body %}
+
+{% if request.user.is_superuser %}
+Only Admins can see this
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <form action="{% url 'questions:questions_create'%}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="row mb-3">
+
+                        {{field.label_tag}}
+                        {{field}}
+                        <div class="text-danger">
+                            {{field.errors}}
+                        </div>
+                        {% if field.help_text %}
+                            <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+                
+                <div class="form-row mt-3">
+                    <button type="submit" class="btn btn-primary">
+                        Add question
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

@@ -11,43 +11,9 @@ Only Admins can see this
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-
-            <form action="{% url 'questions:questions_index'%}" method="GET">
-                <label for="category_filter">Category</label>
-                <select name="category_filter">
-                        <option value =''/>All</option>
-                    {% for cat in categories %}
-                        <option value={{cat}} />{{cat}}</option>
-                    {% endfor %}
-                <input type="submit" />
-            </form>
-
-            <form action="{% url 'questions:questions_index'%}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-
-                {% for field in form %}
-                    <div class="row mb-3">
-
-                        {{field.label_tag}}
-                        {{field}}
-                        <div class="text-danger">
-                            {{field.errors}}
-                        </div>
-                        {% if field.help_text %}
-                            <p class="help">{{ field.help_text|safe }}</p>
-                        {% endif %}
-
-                    </div>
-                {% endfor %}
-                
-                <div class="form-row mt-3">
-                    <button type="submit" class="btn btn-primary">
-                        Add question
-                    </button>
-                </div>
-            </form>
-        </div>
+        <a href="{% url 'questions:questions_create' %}" class="btn btn-primary btn-sm">CreateQn</a>
+    </div>
+    <div class="row">
         <div class="col-md-9">
             <div class="row">
                 {% for question in questions %}
