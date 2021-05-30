@@ -26,5 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('posts/', include('question.urls')),
-    # path('answers/', include('answers.urls')),
+    path('answers/', include('answers.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
