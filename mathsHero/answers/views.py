@@ -1,56 +1,35 @@
-import json
+from question.models import *
+from question.forms import *
+from .models import *
+from .forms import *
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
-from question.models import Question
-from answers.models import Answer
-from answers.forms import AnswerForm
-from django.http.response import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+import uuid
 
 # Create your views here.
-# book = new Review({ name: name, review: review, book: book })
-# book.save()
-
-
+# post answers
 @login_required
-def views_create(request, question):
-    if request.method == 'POST':
-        form = AnswerForm(request.POST)
-        if form.is_valid():
-            # form.save()
-            # 1
-            # review = Review(name=request.POST['name'], review=request.POST['review'],
-            #   book=book)
-            # review.save()
+def view_answers_create(request, pk):
+    try: 
+        question = Question.objects.get(pk=pk)
+        print(question)
+    except Question.DoesNotExist:
+        return redirect('questions:questions_index')
 
-            # 2
-            question = Question.objects.get(pk=book)
-            question.reviews.create(
-                name=request.POST['name'], answer=request.POST['answer'])
+    
+    answer_form = AnswerForm()
+    
+    if request.method=='POST':
+        answer_form = AnswerForm(request.POST, request.FILES)
+        if answer_form.is_valid():
+            # answer = Answer.objects.create(name=request.user.name,answer=answer, question=question)
+            answer = Answer(name=request.user,
+                            answer=request.POST['answer'],
+                            ansimg=request.FILES['ansimg'],
+                            question=question)
+            answer.save()
 
             return redirect('questions:question_show', question.id)
-    return HttpResponse({"message": "works"})
-
-
-@csrf_exempt
-@login_required
-def view_reviews(request, question_id):
-
-    if request.method == 'POST':
-        # convert data from fetch to dict. json to dict
-        # https://www.w3schools.com/python/python_json.asp
-        json_data = json.loads(request.body.decode(encoding='UTF-8'))
-        # find instance of book
-        question = Question.objects.get(pk=question_id)
-        # use instace of book to save reviews
-        question.reviews.create(name=request.user,
-                            review=json_data['review'], question=question_id)
-        # https://docs.djangoproject.com/en/3.2/ref/request-response/#jsonresponse-objects
-        return JsonResponse({"message": "success"}, status=200, safe=True)
-
-    print(request.user.username)
-    answers = Answer.objects.filter(
-        name=request.user)
-    print(answers)
-    serialize = [r.serialize() for ans in answers]
-    return JsonResponse(serialize, safe=False)
+    
+    context = {'question': question, 'answer_form': answer_form,}
+    return render (request, 'answers/answer_create.html', context)

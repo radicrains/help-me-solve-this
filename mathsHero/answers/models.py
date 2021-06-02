@@ -1,10 +1,10 @@
-from accounts.models import *
-from question.models import *
 from django.db import models
 import uuid
+from accounts.models import *
+from question.models import *
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
-
 
 class Answer(models.Model):
     id = models.UUIDField(  # new
@@ -12,12 +12,12 @@ class Answer(models.Model):
         default=uuid.uuid4,
         editable=False)
     
-    name = models.ForeignKey(User, related_name="answers",
+    name = models.ForeignKey(User, related_name="answers_user",
                              on_delete=models.DO_NOTHING)
-    ans_cover = CloudinaryField('image')
-    ans_description = models.TextField(null=True)
+    answer = models.TextField(null=True)
+    ansimg = CloudinaryField('image')
     question = models.ForeignKey(
-        Question, on_delete=models.CASCADE, related_name='answers')
+        Question, on_delete=models.CASCADE, related_name='answers_qn')
 
     def serialize(self):
         return {
@@ -25,9 +25,13 @@ class Answer(models.Model):
             "user": {
                 "username": self.name.username
             },
-            "answer": self.answer,
-            "post": {
+            "answer": {
+                "answer":self.answer,
+                "ansimg":self.ansimg
+            },
+            "question": {
                 "title": self.question.title,
-                "categories": self.question.categories
+                'id': self.question.id
+                # "categories": self.question.categories
             }
         }

@@ -1,4 +1,4 @@
-{% comment %} {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}{{question.title | capfirst}}::{% endblock title %}
 
@@ -6,7 +6,7 @@
 
 
     <div class="col-md-6">
-        <form action="{% url 'questions:question_answer' question.id %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'answers:question_answer' question.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in answer_form %}
             <div class="row mb-3 ">
@@ -26,4 +26,4 @@
         </form>
     </div>
     
-{% endblock body %} {% endcomment %}
+{% endblock body %}

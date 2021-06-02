@@ -3,6 +3,7 @@
 
 from question.models import *
 from question.forms import *
+from answers.models import *
 # from answers.forms import *
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
@@ -10,12 +11,12 @@ import uuid
 # Create your views here.
 
 @login_required
-def view_index(request):
-    
-    form = QuestionForm()
+def view_question_create(request):
+    qns_form = QuestionForm()
+
     if request.method == 'POST':
-        form = QuestionForm(request.POST, request.FILES)
-        if form.is_valid():
+        qns_form = QuestionForm(request.POST, request.FILES)
+        if qns_form.is_valid():
 
             question = Question(title=request.POST['title'],
                         description=request.POST['description'], 
@@ -23,26 +24,30 @@ def view_index(request):
                         user=request.user)
             question.save()
 
-            categories = form.cleaned_data['categories']
+            categories = qns_form.cleaned_data['categories']
             for cat in categories:
                 question.categories.add(cat)
 
             return redirect('questions:questions_index')
+
+    context = {"form": qns_form,} 
+    return render(request, 'question/qn_create.html', context)
+
+@login_required
+def view_index(request):
     
     #filter qn by category selection
     questions = Question.objects.all() 
+    categories = Category.objects.all()
+
     filtered_cat = request.GET.get("category_filter") 
 
     if filtered_cat != '' and filtered_cat is not None: 
         print(filtered_cat)
         questions = questions.filter(categories__name=filtered_cat) 
 
-    
-    categories = Category.objects.all() 
-    context = {"form": form, "questions":questions, "categories":categories} 
-    
+    context = {"questions":questions, "categories":categories} 
     return render(request, 'question/index.html', context)
-
 
 @login_required
 def view_show(request, pk):
@@ -92,47 +97,33 @@ def view_category_create(request):
 
 
 
-# post answers
-@login_required
-def view_answers_create(request, pk):
-    try: 
-        question = Question.objects.get(pk=pk)
-        print(question)
-    except Question.DoesNotExist:
-        return redirect('questions:questions_index')
-
-    
-    answer_form = AnswerForm()
-    
-    if request.method=='POST':
-        answer_form = AnswerForm(request.POST, request.FILES)
-        if answer_form.is_valid():
-            # answer = Answer.objects.create(name=request.user.name,answer=answer, question=question)
-            answer = Answer(name=request.user,
-                            answer=request.POST['answer'],
-                            ansimg=request.FILES['ansimg'],
-                            question=question)
-            answer.save()
-
-            return redirect('questions:question_show', question.id)
-
-        # answer = Answer.objects.filter(question__id=pk)
-        # print(answer)
-
-    # context = {'question': question, 'answer': answer, 'answer_form': answer_form,}
-    context = {'question': question, 'answer_form': answer_form,}
-    return render (request, 'question/answer_create.html', context)
-
+# # post answers
 # @login_required
-# def view_answers(request, pk):
+# def view_answers_create(request, pk):
 #     try: 
 #         question = Question.objects.get(pk=pk)
 #         print(question)
 #     except Question.DoesNotExist:
 #         return redirect('questions:questions_index')
 
-#     qn_answers = Answer.objects.filter(question__id=pk)
-#     print(qn_answers)
+    
+#     answer_form = AnswerForm()
+    
+#     if request.method=='POST':
+#         answer_form = AnswerForm(request.POST, request.FILES)
+#         if answer_form.is_valid():
+#             # answer = Answer.objects.create(name=request.user.name,answer=answer, question=question)
+#             answer = Answer(name=request.user,
+#                             answer=request.POST['answer'],
+#                             ansimg=request.FILES['ansimg'],
+#                             question=question)
+#             answer.save()
 
-#     context = {'answers':qn_answers, 'edit':False}
-#     return render(request, 'question/show.html', context)
+#             return redirect('questions:question_show', question.id)
+
+#         # answer = Answer.objects.filter(question__id=pk)
+#         # print(answer)
+
+#     # context = {'question': question, 'answer': answer, 'answer_form': answer_form,}
+#     context = {'question': question, 'answer_form': answer_form,}
+#     return render (request, 'question/answer_create.html', context)

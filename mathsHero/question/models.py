@@ -43,32 +43,32 @@ class Question(models.Model):
         return reverse("question_show", kwargs={"pk": self.pk})
 
 
-class Answer(models.Model):
-    id = models.UUIDField(  # new
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False)
+# class Answer(models.Model):
+#     id = models.UUIDField(  # new
+#         primary_key=True,
+#         default=uuid.uuid4,
+#         editable=False)
     
-    name = models.ForeignKey(User, related_name="answers_user",
-                             on_delete=models.DO_NOTHING)
-    answer = models.TextField(null=True)
-    ansimg = CloudinaryField('image')
-    question = models.ForeignKey(
-        Question, on_delete=models.CASCADE, related_name='answers_qn')
+#     name = models.ForeignKey(User, related_name="answers_user",
+#                              on_delete=models.DO_NOTHING)
+#     answer = models.TextField(null=True)
+#     ansimg = CloudinaryField('image')
+#     question = models.ForeignKey(
+#         Question, on_delete=models.CASCADE, related_name='answers_qn')
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "user": {
-                "username": self.name.username
-            },
-            "answer": {
-                "answer":self.answer,
-                "ansimg":self.ansimg
-            },
-            "question": {
-                "title": self.question.title,
-                'id': self.question.id
-                # "categories": self.question.categories
-            }
-        }
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "user": {
+#                 "username": self.name.username
+#             },
+#             "answer": {
+#                 "answer":self.answer,
+#                 "ansimg":self.ansimg
+#             },
+#             "question": {
+#                 "title": self.question.title,
+#                 'id': self.question.id
+#                 # "categories": self.question.categories
+#             }
+#         }

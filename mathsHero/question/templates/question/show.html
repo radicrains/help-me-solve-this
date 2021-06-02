@@ -16,7 +16,7 @@
 
             <a href="{% url 'questions:question_show' question.id %}?action=edit" class="btn btn-primary btn-sm">Edit</a>
             <a href="{% url 'questions:question_show' question.id %}?action=del" class="btn btn-primary btn-sm">Delete</a>
-            <a href="{% url 'questions:question_answer' question.id %}" class="btn btn-primary btn-sm">Answer</a>
+            <a href="{% url 'answers:question_answer' question.id %}" class="btn btn-primary btn-sm">Answer</a>
         </div>
         
         {% if edit %}
