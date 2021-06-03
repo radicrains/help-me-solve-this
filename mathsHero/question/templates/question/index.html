@@ -14,7 +14,7 @@ Only Admins can see this
         <div class="col-md-9">
             <a href="{% url 'questions:questions_create' %}" class="btn btn-primary btn-sm">CreateQn</a>
         <div>
-        <div class="col-md-9">
+        {% comment %} <div class="col-md-9">
             <form action="{% url 'questions:questions_index'%}" method="GET">
                 <label for="category_filter">Category</label>
                 <select name="category_filter">
@@ -24,7 +24,7 @@ Only Admins can see this
                     {% endfor %}
                 <input type="submit" />
             </form>
-        </div>
+        </div> {% endcomment %}
     </div>
     <div class="row">
         <div class="col-md-9">

@@ -13,6 +13,7 @@ python-dotenv = "*"
 psycopg2-binary = "*"
 djangorestframework-simplejwt = "*"
 cloudinary = "*"
+fontawesome-free = "*"
 
 [dev-packages]
 

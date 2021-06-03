@@ -1,21 +1,30 @@
 {% extends 'accounts/base.html' %}
 
 {% block content %}
-<form action="" method="post">
+<div class="container grey lighten-3 center section">
+    <form action="" method="post">
     {% csrf_token %}
-    <div class="row">
-        <div class="col-md-12">
-            <label>Username</label>
+    <div class="row section">
+        <div class="col s6 offset-s3">
+            <label class="left">Username</label>
             <input type="text" class="form-control" name="username">
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <label>Password</label>
+        <div class="col s6 offset-s3">
+            <label class="left">Password</label>
             <input type="password" class="form-control" name="password">
         </div>
+    </div>
         <button class="btn btn-primary">Login</button>
-</form>
+
+        <div class="row section">
+            <p class="text-center">Don't have an account yet? <a href="{% url 'accounts:user_register'%}">register</a> here.</p>
+        </div>
+    
+    </form>
+</div>
+
 
 {% endblock content %}

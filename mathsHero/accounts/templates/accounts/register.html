@@ -2,36 +2,45 @@
 
 {% block content %}
 
-<h1>Registration<h1>
-        <div class="container">
+    <div class="container grey lighten-3 center section">
 
-            <form action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Email</label>
-                        <input type="text" class="form-control" name="email">
-                    </div>
-                    <div class="col-md-6">
-                        <label>Username</label>
-                        <input type="text" class="form-control" name="username">
-                    </div>
+        <form action="" method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            
+            <div class="row section">
+                <div class="col s6 offset-s3">
+                    <label class="left">Email</label>
+                    <input type="text" class="form-control" name="email">
                 </div>
+            </div>
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <label class="left">Username</label>
+                    <input type="text" class="form-control" name="username">
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Password</label>
-                        <input type="password" class="form-control" name="password">
-                    </div>
-                    <div class="col-md-6">
-                        <label>Password confirm</label>
-                        <input type="password" class="form-control" name="password_confirm">
-                    </div>
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <label class="left">Password</label>
+                    <input type="password" class="form-control" name="password">
                 </div>
-                <button class="btn btn-primary">Register</button>
+            </div>
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <label class="left">Password confirm</label>
+                    <input type="password" class="form-control" name="password_confirm">
+                </div>
+            </div>
+
+            <button class="btn btn-primary">Register</button>
+            
+            <div class="section">
                 <p class="text-center">If you already have an account, <a href="{% url 'accounts:user_login'%}">login</a> instead.</p>
-            </form>
+            </div>
+            
+        </form>
 
-        </div>
+    </div>
 
 {% endblock content %}

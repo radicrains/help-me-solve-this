@@ -33,7 +33,7 @@ def view_question_create(request):
     context = {"form": qns_form,} 
     return render(request, 'question/qn_create.html', context)
 
-@login_required
+# @login_required
 def view_index(request):
     
     #filter qn by category selection
