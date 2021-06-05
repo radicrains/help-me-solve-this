@@ -1,0 +1,46 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+    <div class="container grey lighten-3 center section">
+
+        <form action="" method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            
+            <div class="row section">
+                <div class="col s6 offset-s3">
+                    <label class="left">Email</label>
+                    <input type="text" class="form-control" name="email">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <label class="left">Username</label>
+                    <input type="text" class="form-control" name="username">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <label class="left">Password</label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <label class="left">Password confirm</label>
+                    <input type="password" class="form-control" name="password_confirm">
+                </div>
+            </div>
+
+            <button class="waves-effect waves-light btn">Register</button>
+            
+            <div class="section">
+                <p class="text-center">If you already have an account, <a href="{% url 'accounts:user_login'%}">login</a> instead.</p>
+            </div>
+            
+        </form>
+
+    </div>
+
+{% endblock content %}

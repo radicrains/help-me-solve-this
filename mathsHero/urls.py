@@ -27,4 +27,4 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('posts/', include('question.urls')),
     path('answers/', include('answers.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

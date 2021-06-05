@@ -61,4 +61,4 @@ def logout_view(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     #NOTETOSELF - REDIRECT TO HOME PAGE
-    return redirect('accounts:user_login')
+    return redirect('accounts:home')
