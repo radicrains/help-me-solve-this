@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 from dotenv import load_dotenv, find_dotenv
 from datetime import timedelta
 
@@ -63,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 
@@ -147,10 +149,10 @@ AUTH_USER_MODEL = "accounts.User"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-# static files link
-STATIC_ROOT = os.path.join(BASE_DIR, '/static')
-STATICFILES_DIR = os.path.join(BASE_DIR, '/static')
+# STATIC_URL = '/static/'
+# # static files link
+# STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+# STATICFILES_DIR = os.path.join(BASE_DIR, '/static')
 # remove warning fo primary key
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -174,3 +176,15 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+    
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static')),
+
+django_heroku.settings(locals())
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

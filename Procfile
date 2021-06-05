@@ -1,1 +1,1 @@
-web: gunicorn {mathsHero}.wsgi --log-file -
+web: gunicorn mathsHero.wsgi --log-file -
