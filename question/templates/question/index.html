@@ -17,19 +17,12 @@ Only Admins can see this
 
 <body class="blue-grey darken-4">
     <div class="container">
-        {% if request.user.is_authenticated %}
-        <div class="row">
-            <div class="col-md-9">
-                <a href="{% url 'questions:questions_create' %}" class="btn btn-primary btn-sm">CreateQn</a>
-            <div>
-        </div>
-        {% endif %}
-
-        <div class="row">
-            <div class="col-md-9">
-                {% comment %} <div class="row"> {% endcomment %}
+        {% comment %} <div class="row">
+            <div class="col-md-9"> {% endcomment %}
+                <div class="row">
                     {% for question in questions %}
                     <div class="col s12 m6 l3">
+                    
                         <div class="card">
                             <div class="card-image">
                                 <img src="{{question.cover.url}}" class="card-img-top" />
@@ -42,24 +35,26 @@ Only Admins can see this
                                     {{question.categories.name}}
                                 </p>
                                 {% if request.user.is_authenticated %}
-                                <a class="card-link btn btn-primary" href="{% url 'questions:question_show' question.id %}">Show</a>
+                                    <a href="{% url 'questions:question_show' question.id %}">Show</a>
                                 {% else %}
-                                <a href="{% url 'accounts:user_register'%}">Register</a>
-                                or
-                                <a href="{% url 'accounts:user_login'%}">Login</a>
-                                to view the answers
+                                    <a href="{% url 'accounts:user_register'%}">Register</a>
+                                    or
+                                    <a href="{% url 'accounts:user_login'%}">Login</a>
+                                    to view the answers
                                 {% endif %}
                             </div>
                         </div>
                     </div>
+
+
                     {% empty %}
                     <div class="alert alert-warning">
                         No questions yet
                     </div>
                     {% endfor %}
-                {% comment %} </div> {% endcomment %}
-            </div>
-        </div>
+                </div>
+            {% comment %} </div>
+        </div> {% endcomment %}
     </div>
 </body>
 

@@ -35,12 +35,12 @@
     <div class="row">
         <div class="col-md-6">
         {% for ans in answers %}
-            <div class="d-flex align-items-center">
-                <div class="flex-shrink-0">
+            <div>
+                <div class="chip">
                     <img src="https://randomuser.me/api/portraits/thumb/lego/5.jpg" alt="">
+                    {{ans.name.username}}
                 </div>
                 <div class="flex-grow-1 ms-3">
-                    <h3> {{ans.name.username}}</h3>
                     {{ans.answer}}
                     <img src="{{ans.ansimg.url}}" />
                 </div>
