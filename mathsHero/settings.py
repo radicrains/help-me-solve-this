@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+# import django_heroku
 from dotenv import load_dotenv, find_dotenv
 from datetime import timedelta
 
@@ -185,6 +185,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static')),
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
