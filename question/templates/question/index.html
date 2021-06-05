@@ -27,14 +27,13 @@ Only Admins can see this
 
         <div class="row">
             <div class="col-md-9">
-                <div class="row">
+                {% comment %} <div class="row"> {% endcomment %}
                     {% for question in questions %}
-                    <div class="col-md-3 mb-3">
+                    <div class="col s12 m6 l3">
                         <div class="card">
-                            {% if question.cover  %}
-                            <img src="{{question.cover.url}}" class="card-img-top" />
-                            {% endif %}
-
+                            <div class="card-image">
+                                <img src="{{question.cover.url}}" class="card-img-top" />
+                            </div>
                             <div class="card-body">
                                 <p class="card-title">
                                     {{question.title}}
@@ -58,7 +57,7 @@ Only Admins can see this
                         No questions yet
                     </div>
                     {% endfor %}
-                </div>
+                {% comment %} </div> {% endcomment %}
             </div>
         </div>
     </div>

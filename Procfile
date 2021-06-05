@@ -1,0 +1,1 @@
+web: gunicorn {mathsHero}.wsgi --log-file -
