@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,10 +22,6 @@
     <nav>
         <div class="nav-wrapper teal lighten-2">
             <a href="{% url 'accounts:home'%}" class="brand-logo center">MathsHero</a>
-            {% comment %} <ul class="left hide-on-med-and-down">
-                <li><a href="{% url 'accounts:user_register'%}">Register</a></li>
-                <li><a href="{% url 'accounts:user_login'%}">Login</a></li>
-            </ul> {% endcomment %}
         </div>
     </nav>
 
@@ -31,15 +29,13 @@
         <div class="row">
             <div class="col s6 offset-s3 center">
                 <div class="card section grey lighten-3">
-                    <div class="card-image">
-                        <img src="/accounts/templates/accounts/logo.jpg">
-                    </div>
-                    <div class="card-content ">
-                        <p>to insert mathsHero logo here</p>
+                    <div class="card-image section">
+                        <img src="{% static 'images/MH_logo.png' %}" alt="MathsHero Logo">
+                        <span></span>
                     </div>
                     <div class="card-action">
-                        <a href="{% url 'accounts:user_register'%}">Register</a>
-                        <a href="{% url 'accounts:user_login'%}">Login</a>
+                        <button class='waves-effect waves-light btn' href="{% url 'accounts:user_register'%}">Register</button>
+                        <button class='waves-effect waves-light btn' href="{% url 'accounts:user_login'%}">Login</button>
                     </div>
                 </div>
             </div>
@@ -50,6 +46,14 @@
 
     {% block body %}{% endblock body %}
 
-    {% block scripts %}{% endblock scripts %}
+    {% block scripts %}
+    <script type="text/javascript">
+        $(document).ready(function() { // check whether your page is loadded fully
+            $("img").each(function() {   // for each img it will assign img-responsive class or img-fluid 
+                $(this).addClass("img-responsive")
+            })
+        })
+    </script>
+    {% endblock scripts %}
 </body>
 </html>
