@@ -22,6 +22,10 @@
     <nav>
         <div class="nav-wrapper teal lighten-2">
             <a href="{% url 'accounts:home'%}" class="brand-logo center">MathsHero</a>
+            <ul class='right hide-on-med-and-down'> 
+                <li><a  href="{% url 'accounts:user_register'%}">Register</a></li>
+                <li><a class='right' href="{% url 'accounts:user_login'%}">Login</a></li>
+            </ul>            
         </div>
     </nav>
 
@@ -31,11 +35,16 @@
                 <div class="card section grey lighten-3">
                     <div class="card-image section">
                         <img src="{% static 'images/MH_logo.png' %}" alt="MathsHero Logo">
-                        <span></span>
+                    </div>
+                    <div class="card-content teal-text">
+                        <span class="card-title">Welcome!</span>
+                        <p> This app is intended for the student community to help each other 
+                            out with their maths questions. It's a place for you to understand
+                            the step-by-step approach in solving your problem.
+                        </p>
                     </div>
                     <div class="card-action">
-                        <button class='waves-effect waves-light btn' href="{% url 'accounts:user_register'%}">Register</button>
-                        <button class='waves-effect waves-light btn' href="{% url 'accounts:user_login'%}">Login</button>
+                        <a class='waves-effect waves-light btn' href="{% url 'questions:questions_index'%}">See Qustions</a>
                     </div>
                 </div>
             </div>
