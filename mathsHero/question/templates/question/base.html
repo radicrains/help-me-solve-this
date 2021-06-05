@@ -62,12 +62,15 @@
         </li>
     </ul> {% endcomment %}
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper teal lighten-2">
             <a href="{% url 'questions:questions_index'%}" class="brand-logo center">MathsHero</a>
+
+            {% if request.user.is_authenticated %}
             <ul class="right hide-on-med-and-down">
                 <li><a class="dropdown-trigger" data-target="dropdown">Select Category</a></li>
                 <li><a href="{% url 'accounts:user_logout'%}"><i class="large material-icons">exit_to_app</i></a></li>
             </ul>
+            {% endif %}
         </div>
   </nav>
 
