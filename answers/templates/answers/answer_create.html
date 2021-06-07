@@ -4,8 +4,20 @@
 
 {% block body %}
 
+<div class = "container">
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <img src="{{question.cover.url}}" />
+            <h3>{{question.title | capfirst}}</h3>
 
-    <div class="col-md-6">
+            {% for cat in question.categories.all %}
+            <li>{{cat.name}}</li>
+            {% endfor %}
+            <p>{{question.description}}</p>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row section">
         <form action="{% url 'answers:question_answer' question.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in answer_form %}
@@ -25,5 +37,8 @@
             <button type="submit" class="btn btn-primary btn-sm">Answer</button>
         </form>
     </div>
+</div>
+
+    
     
 {% endblock body %}
