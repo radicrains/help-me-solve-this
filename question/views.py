@@ -13,6 +13,7 @@ import uuid
 @login_required
 def view_question_create(request):
     qns_form = QuestionForm()
+    template_name='question/qn_create.html'
 
     if request.method == 'POST':
         qns_form = QuestionForm(request.POST, request.FILES)
@@ -31,7 +32,7 @@ def view_question_create(request):
             return redirect('questions:questions_index')
 
     context = {"form": qns_form,} 
-    return render(request, 'question/qn_create.html', context)
+    return render(request, template_name, context)
 
 # @login_required
 def view_index(request):

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'question',
     'accounts',
     'answers',
+    'materializecssform',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

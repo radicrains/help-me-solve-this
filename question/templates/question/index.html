@@ -21,7 +21,7 @@ Only Admins can see this
             <div class="col-md-9"> {% endcomment %}
                 <div class="row">
                     {% for question in questions %}
-                    <div class="col s12 m6 l3">
+                    <div class="col s12 m8 l4">
                     
                         <div class="card">
                             <div class="card-image">
@@ -38,7 +38,7 @@ Only Admins can see this
                                     <a href="{% url 'questions:question_show' question.id %}">Show</a>
                                 {% else %}
                                     <a href="{% url 'accounts:user_register'%}">Register</a>
-                                    or
+                                    /
                                     <a href="{% url 'accounts:user_login'%}">Login</a>
                                     to view the answers
                                 {% endif %}
@@ -52,9 +52,13 @@ Only Admins can see this
                         No questions yet
                     </div>
                     {% endfor %}
-                </div>
-            {% comment %} </div>
-        </div> {% endcomment %}
+                {% comment %} </div>
+            </div> {% endcomment %}
+        </div> 
+    </div>
+        </div> 
+    </div>
+        </div> 
     </div>
 </body>
 
