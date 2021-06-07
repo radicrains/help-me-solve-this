@@ -7,7 +7,10 @@
 
 {% block body %}
 <div class="container">
-    <div class="row">
+    <div class="row section">
+        <a href="{% url 'questions:questions_index' %}" class="btn btn-primary btn-sm">Back to Listing</a>
+    </div>
+    <div class="row section">
         <div class="col s6 offset-s3">
             <img src="{{question.cover.url}}" />
             <h3>{{question.title | capfirst}}</h3>
@@ -24,8 +27,13 @@
     </div>
 
         {% if edit %}
+        
         <div class="row section">
             <div class="divider"></div>
+            <div class="row section">
+                <a href="{% url 'questions:question_show' question.id %}" class="btn btn-primary btn-sm">Back to Question</a>
+            </div>
+            
             <div class="row section">
                 <div class="col s6 offset-s3">
                     <form action="{% url 'questions:question_show' question.id %}?action=edit" method="post" enctype="multipart/form-data">

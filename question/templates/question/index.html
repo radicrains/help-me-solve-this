@@ -19,18 +19,19 @@ Only Admins can see this
             
                 <div class="card">
                     <div class="card-image">
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'questions:question_show' question.id %}">
+                            <img src="{{question.cover.url}}" class="card-img-top" /></a>
+                    {% else %}
                         <img src="{{question.cover.url}}" class="card-img-top" />
+                    {% endif %}
                     </div>
                     <div class="card-body">
                         <p class="card-title">
                             {{question.title}}
                         </p>
-                        <p class="card-title">
-                            {{question.categories.name}}
-                        </p>
-                        {% if request.user.is_authenticated %}
-                            <a href="{% url 'questions:question_show' question.id %}">Show</a>
-                        {% else %}
+
+                        {% if request.user.is_authenticated == False %}
                             <a href="{% url 'accounts:user_register'%}">Register</a> /
                             <a href="{% url 'accounts:user_login'%}">Login</a> to view the answers
                         {% endif %}

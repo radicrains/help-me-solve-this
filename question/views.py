@@ -40,9 +40,8 @@ def view_index(request):
     #filter qn by category selection
     questions = Question.objects.all() 
     categories = Category.objects.all()
-
+    
     filtered_cat = request.GET.get("category_filter") 
-
     if filtered_cat != '' and filtered_cat is not None: 
         print(filtered_cat)
         questions = questions.filter(categories__name=filtered_cat) 
