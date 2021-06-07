@@ -13,12 +13,13 @@ Only Admins can see this
 {% endif %}
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
+    <div class="row section">
+        <div class="col s6 offset-s3">
             <form action="{% url 'questions:questions_create'%}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                {{ form|materializecss:"s6" }}
+                {{ form|materializecss}}
+                
                 {% if field.help_text %}
                     <p class="help">{{ field.help_text|safe }}</p>
                 {% endif %}
@@ -40,11 +41,12 @@ Only Admins can see this
                 
                 <div class="form-row mt-3">
                     <button type="submit" class="btn btn-primary">
-                        Add question
+                        Create question
                     </button>
                 </div>
             </form>
         </div>
+        
     </div>
 </div>
 {% endblock body %}

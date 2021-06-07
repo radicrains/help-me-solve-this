@@ -1,4 +1,5 @@
 {% extends 'question/base.html' %}
+{% load materializecss %}
 
 {% comment %} {% extends 'accounts/base.html' %} {% endcomment %}
 
@@ -7,7 +8,7 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col s6 offset-s3">
             <img src="{{question.cover.url}}" />
             <h3>{{question.title | capfirst}}</h3>
 
@@ -20,22 +21,28 @@
             <a href="{% url 'questions:question_show' question.id %}?action=del" class="btn btn-primary btn-sm">Delete</a>
             <a href="{% url 'answers:question_answer' question.id %}" class="btn btn-primary btn-sm">Answer</a>
         </div>
-        
+    </div>
+
         {% if edit %}
-        <div class="col-md-6">
-            <form action="{% url 'questions:question_show' question.id %}?action=edit" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{form}}
-                <button>Edit</button>
-            </form>
+        <div class="row section">
+            <div class="divider"></div>
+            <div class="row section">
+                <div class="col s6 offset-s3">
+                    <form action="{% url 'questions:question_show' question.id %}?action=edit" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form|materializecss}}
+                        <button class="btn btn-primary btn-sm">Edit the Question</button>
+                    </form> 
+                </div>
+            </div>
         </div>
         {% endif %}
 
-    </div>
-    <div class="row">
-        <div class="col-md-6">
+    <div class="divider"></div>
+    <div class="row section">
+        <div class="col s6 offset-s3">
         {% for ans in answers %}
-            <div>
+            <div class = "row section">
                 <div class="chip">
                     <img src="https://randomuser.me/api/portraits/thumb/lego/5.jpg" alt="">
                     {{ans.name.username}}
@@ -45,6 +52,7 @@
                     <img src="{{ans.ansimg.url}}" />
                 </div>
             </div>
+            <div class="divider"></div>
         {% endfor %}
         </div>
     </div>
