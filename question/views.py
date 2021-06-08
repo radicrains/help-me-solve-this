@@ -38,9 +38,9 @@ def view_question_create(request):
 def view_index(request):
     
     #filter qn by category selection
-    questions = Question.objects.all() 
+    questions = Question.objects.order_by('-created_at')
     categories = Category.objects.all()
-    
+
     filtered_cat = request.GET.get("category_filter") 
     if filtered_cat != '' and filtered_cat is not None: 
         print(filtered_cat)

@@ -73,6 +73,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mathsHero.urls'
 
+LOGIN_URL = '/login/'
 
 TEMPLATES = [
     {

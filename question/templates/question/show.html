@@ -8,7 +8,7 @@
 {% block body %}
 <div class="container">
     <div class="row section">
-        <a href="{% url 'questions:questions_index' %}" class="btn btn-primary btn-sm">Back to Listing</a>
+        <a href="{% url 'questions:questions_index' %}"><i class="small material-icons">arrow_back</i></a>
     </div>
     <div class="row section">
         <div class="col s6 offset-s3">
@@ -31,10 +31,9 @@
         <div class="row section">
             <div class="divider"></div>
             <div class="row section">
-                <a href="{% url 'questions:question_show' question.id %}" class="btn btn-primary btn-sm">Back to Question</a>
+                <a href="{% url 'questions:question_show' question.id %}"><i class="small material-icons">close</i></a>
             </div>
-            
-            <div class="row section">
+            <div class="row">
                 <div class="col s6 offset-s3">
                     <form action="{% url 'questions:question_show' question.id %}?action=edit" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
