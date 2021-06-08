@@ -17,22 +17,18 @@ Only Admins can see this
             
                 <div class="card center small">
                     <div class="card-image">
-                        {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
-                            <a href="{% url 'questions:question_show' question.id %}">
-                                <img src="{{question.cover.url}}" class="card-img-top" /></a>
-                        {% comment %} {% else %} {% endcomment %}
+                        <a href="{% url 'questions:question_show' question.id %}">
                             <img src="{{question.cover.url}}" class="card-img-top" />
-                        {% comment %} {% endif %} {% endcomment %}
+                        </a>
                     </div>
                     <div class="card-content">
                         {{question.title}}
                     </div>
                     <div class="card-action">
-                        {% comment %} {% if request.user.is_authenticated == False %}
-                            Register/Login to view the question details
-                        {% else %} {% endcomment %}
-                        <div>{{question.user}}</div>
-                        {% comment %} {% endif %} {% endcomment %}
+                        {% for cat in question.categories.all %}
+                            <div class="left chip teal lighten-5">{{cat.name}}</div>
+                        {% endfor %}
+                        <div class="right chip teal lighten-5">{{question.user}}</div>
                     </div>
                 </div>
             </div>
