@@ -2,8 +2,10 @@ from accounts.models import User, Profile
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from django.db import IntegrityError
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
 from django.contrib import messages
 from .forms import *
 
@@ -76,7 +78,7 @@ def user_update_view(request):
         if user_form.is_valid():
             user_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('accounts:user_profile')
+            return redirect('questions:questions_index')
     else:
         user_form = UserUpdateForm(instance=request.user)
 
@@ -86,4 +88,3 @@ def user_update_view(request):
     }
 
     return render(request, "accounts/profile.html", context)
-
