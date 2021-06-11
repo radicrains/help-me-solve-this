@@ -17,7 +17,7 @@ This app is intended for the student community to help each other out with their
 
 2. Open up the repo in VS Code / type ```code .``` in the terminal
 
-3. Create your own .env file  and include your own value for each of the following key:
+3. Create your own ```.env``` file  and include your own value for each of the following key:
     - SECRET_KEY
     - DB_NAME
     - DB_USER
@@ -49,7 +49,7 @@ This application is built with Django, Html, PostgreSQL and Materialize
 
 ## FUTURE DEVELOPMENTS
 - Fix Like Model
-- Have user filter see their post
+- Update reply post
 - Allow groups/roles for teacher/students
 - Teachers able to pin model answers
 - Level up student's badge for their contributions in answering the questions.
