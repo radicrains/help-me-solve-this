@@ -88,3 +88,7 @@ def user_update_view(request):
     }
 
     return render(request, "accounts/profile.html", context)
+
+
+# def password_success(request):
+#     return render(request, 'accounts/password_success.html',{})
