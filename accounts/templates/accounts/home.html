@@ -19,16 +19,6 @@
 </head>
 <body class = "blue-grey darken-4">
 
-    {% comment %} <nav>
-        <div class="nav-wrapper teal lighten-2">
-            <a href="{% url 'accounts:home'%}" class="brand-logo center">MathsHero</a>
-            <ul class='right hide-on-med-and-down'> 
-                <li><a  href="{% url 'accounts:user_register'%}">Register</a></li>
-                <li><a class='right' href="{% url 'accounts:user_login'%}">Login</a></li>
-            </ul>            
-        </div>
-    </nav> {% endcomment %}
-
     <div class="container">
         <div class="row">
             <div class="col s6 offset-s3 center">
@@ -40,11 +30,13 @@
                         <span class="card-title">Welcome!</span>
                         <p> This app is intended for the student community to help each other 
                             out with their maths questions. It's a place for you to understand
-                            the step-by-step approach in solving your problem.
+                            the step-by-step approach in solving your maths problem, as well as learn from your peers!
+
+                            <br><br>Let's get smarter!
                         </p>
                     </div>
                     <div class="card-action">
-                        <a class='waves-effect waves-light btn' href="{% url 'questions:questions_index'%}">See Qustions</a>
+                        <a class='btn pink' href="{% url 'questions:questions_index'%}">See Qustions</a>
                     </div>
                 </div>
             </div>

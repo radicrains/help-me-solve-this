@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'question',
     'accounts',
     'answers',
+    'materializecssform',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,6 +73,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mathsHero.urls'
 
+LOGIN_URL = '/login/'
 
 TEMPLATES = [
     {

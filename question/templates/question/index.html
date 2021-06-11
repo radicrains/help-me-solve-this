@@ -1,61 +1,44 @@
 {% extends 'question/base.html' %}
 
-{% comment %} {% extends 'accounts/base.html' %} {% endcomment %}
-
 {% block title %}All questions::{% endblock title %}
 
 
 {% block body %}
 
-{% if request.user.is_superuser %}
+{% comment %} {% if request.user.is_superuser %}
 Only Admins can see this
-{% endif %}
-
-{% comment %} {% if request.user.is_authenticated %} {% endcomment %}
-
-{% comment %} {% else %} {% endcomment %}
+{% endif %} {% endcomment %}
 
 <body class="blue-grey darken-4">
     <div class="container">
-        {% comment %} <div class="row">
-            <div class="col-md-9"> {% endcomment %}
-                <div class="row">
-                    {% for question in questions %}
-                    <div class="col s12 m6 l3">
-                    
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{question.cover.url}}" class="card-img-top" />
-                            </div>
-                            <div class="card-body">
-                                <p class="card-title">
-                                    {{question.title}}
-                                </p>
-                                <p class="card-title">
-                                    {{question.categories.name}}
-                                </p>
-                                {% if request.user.is_authenticated %}
-                                    <a href="{% url 'questions:question_show' question.id %}">Show</a>
-                                {% else %}
-                                    <a href="{% url 'accounts:user_register'%}">Register</a>
-                                    or
-                                    <a href="{% url 'accounts:user_login'%}">Login</a>
-                                    to view the answers
-                                {% endif %}
-                            </div>
-                        </div>
+        <div class="row">
+            {% for question in questions %}
+            <div class="col s12 m6 l4">
+                <div class="card center small ">
+                    <div class="card-image">
+                        <a href="{% url 'questions:question_show' question.id %}">
+                            <img class="responsive-img" src="{{question.cover.url}}" class="card-img-top" />
+                        </a>
                     </div>
-
-
-                    {% empty %}
-                    <div class="alert alert-warning">
-                        No questions yet
+                    <div class="card-content">
+                        {{question.title | capfirst}}
                     </div>
-                    {% endfor %}
+                    <div class="card-action">
+                        {% for cat in question.categories.all %}
+                           <div class="left chip teal lighten-5">{{cat.name | capfirst}}</div>
+                        {% endfor %}
+                        <div class="right chip teal lighten-5">{{question.user | capfirst}}</div>
+                    </div>
                 </div>
-            {% comment %} </div>
-        </div> {% endcomment %}
+            </div>
+            {% empty %}
+            <div class="alert yellow lighten-3">
+                No questions yet
+            </div>
+            {% endfor %}
+        </div> 
     </div>
+
 </body>
 
 {% endblock body %}

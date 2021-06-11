@@ -4,11 +4,33 @@
 
 {% block body %}
 
-<form method="POST" action="">
-    {% csrf_token %}
-    {{category_form.as_p}}
+<body class="blue-grey darken-4">
+    <div class="container grey lighten-3">
+        <div class="row section center">
+        <h4>List of Categories</h4>
+        <ul>
+            {% for cat in categories %}
+            <li> {{cat}} </li>
+            {% endfor %}
+        </ul>
+        </div>
 
-    <button type="submit">Add Category</button>
-</form>
+
+        <div class="row center">
+            <div class="col s6 offset-s3">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {{category_form.as_p}}
+
+                    <button type="submit" class='btn pink'>Add Category</button>
+                </form>
+            </div>
+        </div>
+        <div class="divider"></div>
+
+    </div>
+</body>
+
+
 
 {% endblock body %}

@@ -16,6 +16,7 @@ cloudinary = "*"
 fontawesome-free = "*"
 gunicorn = "*"
 whitenoise = "*"
+django-materializecss-form = "*"
 
 [dev-packages]
 

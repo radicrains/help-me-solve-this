@@ -20,26 +20,22 @@
 
     <nav>
         <div class="nav-wrapper teal lighten-2">
-            <a href="{% url 'accounts:home'%}" class="brand-logo center">MathsHero</a>
-            <ul class='right hide-on-med-and-down'> 
-                <li><a  href="{% url 'accounts:user_register'%}">Register</a></li>
-                <li><a class='right' href="{% url 'accounts:user_login'%}">Login</a></li>
-            </ul>            
+            <div class="container">
+                <a href="{% url 'accounts:home'%}" class="brand-logo center">MathsHero</a>
+                <ul class='right hide-on-med-and-down'> 
+                    <li><a  href="{% url 'accounts:user_register'%}">Register</a></li>
+                    <li><a class='right' href="{% url 'accounts:user_login'%}">Login</a></li>
+                </ul>  
+            </div>
         </div>
     </nav>
 
     {% if messages %}
 
     {% for message in messages %}
-    <div class="container-fluid p-0">
-        <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-            
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="background-color:transparent; border-color:transparent;">
-                <span aria-hidden="true">&times;</span>
-            </button>
-
+    <div class="container center">
+        <div class="alert {{ message.tags }} yellow lighten-3" role="alert" >
             {{ message }}
-            
         </div>
     </div>
     {% endfor %}
