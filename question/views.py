@@ -71,14 +71,15 @@ def view_show(request, pk):
 
     qn_answers = Answer.objects.filter(question_id=pk)
     
-    total_likes = question.total_likes()
+    # total_likes = question.total_likes()
 
-    liked = False
-    if question.likes.filter(id=request.user.id).exists():
-        liked = True
+    # liked = False
+    # if question.likes.filter(id=request.user.id).exists():
+    #     liked = True
     
 
-    context = {"question": question, 'answers':qn_answers, "edit": False, "total_likes":total_likes, "liked":liked}
+    # context = {"question": question, 'answers':qn_answers, "edit": False, "total_likes":total_likes, "liked":liked}
+    context = {"question": question, 'answers':qn_answers, "edit": False}
     return render(request, 'question/show.html', context)
 
 

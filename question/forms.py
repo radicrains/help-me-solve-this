@@ -27,7 +27,8 @@ class QuestionForm(forms.ModelForm):
             }),
             'user': forms.HiddenInput(),
         }
-        exclude = ('user','likes')
+        # exclude = ('user','likes')
+        exclude = ('user',)
 
 
 class CategoryForm(forms.ModelForm):

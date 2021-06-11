@@ -36,7 +36,7 @@
                         <a href="{% url 'answers:question_answer' question.id %}" class="btn transparent z-depth-0 teal-text"><i class="material-icons left">insert_comment</i>REPLYPOST</a>
                     </div>
                     <div class="right">
-                        <form action="{% url 'questions:question_show' question.id %}?action=edit" method="POST">
+                        {% comment %} <form action="{% url 'questions:question_show' question.id %}?action=edit" method="POST">
                             {% csrf_token %}
                             {% if liked %}
                                 <button type="submit" name="qns_id" value="{{question.id}}" 
@@ -45,7 +45,7 @@
                                 <button type="submit" name="qns_id" value="{{question.id}}" 
                                     class="btn transparent z-depth-0 teal-text"><i class="material-icons right">favorite_border</i>{{question.total_likes}} </button>
                             {% endif %}      
-                        </form> 
+                        </form>  {% endcomment %}
                     </div>
                 </div>
             </div>
