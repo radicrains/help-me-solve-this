@@ -36,7 +36,8 @@
                         <a href="{% url 'answers:question_answer' question.id %}" class="btn transparent z-depth-0 teal-text"><i class="material-icons left">insert_comment</i>REPLYPOST</a>
                     </div>
                     <div class="right">
-                        {% comment %} <form action="{% url 'questions:question_show' question.id %}?action=edit" method="POST">
+                        <a href="{% url 'answers:question_answer' question.id %}" class="btn transparent z-depth-0 teal-text"><i class="material-icons left">insert_comment</i>REPLYPOST</a>
+                        {% comment %} <form action="{% url 'questions:question_show' question.id %}" method="POST">
                             {% csrf_token %}
                             {% if liked %}
                                 <button type="submit" name="qns_id" value="{{question.id}}" 
@@ -57,7 +58,7 @@
             <div class="row section">
                 <small><a href="{% url 'questions:question_show' question.id %}" class="btn grey left"><i class="material-icons">cancel</i></a></small>
                 <div class="col s6 offset-s3">
-                    <form action="{% url 'questions:question_show' question.id %}" method="post" enctype="multipart/form-data">
+                    <form action="{% url 'questions:question_show' question.id %}?action=edit" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{form|materializecss}}
                         <button class="btn pink"><i class="material-icons left">mode_edit</i>Edit</button>
