@@ -65,7 +65,7 @@ def logout_view(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     #NOTETOSELF - REDIRECT TO HOME PAGE
-    return redirect('accounts:home')
+    return redirect('questions:questions_index')
 
 
 @login_required
