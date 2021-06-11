@@ -1,12 +1,8 @@
-# from question.models import Category, Question
-# from question.forms import CategoryForm, QuestionForm
-
 from question.models import *
 from question.forms import *
 from answers.models import *
-# from answers.forms import *
 from django.shortcuts import redirect, render, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 import uuid
 # Create your views here.
 
@@ -87,7 +83,8 @@ def view_show(request, pk):
 
 
 @login_required
-def view_category_create(request):
+@user_passes_test(lambda u: u.is_superuser, login_url='/login/', redirect_field_name='/posts/')
+def view_category(request):
 
     category_form = CategoryForm()
     if request.method == 'POST':
@@ -96,8 +93,11 @@ def view_category_create(request):
             category = Category(name=request.POST['name'])
             category_form.save()
 
-            return redirect('questions:questions_index')
-    context = {"category_form": category_form}
+            return redirect('questions:category')
+    
+    categories = Category.objects.all()
+
+    context = {"category_form": category_form, "categories":categories}
     return render(request, 'question/category.html', context)
 
 

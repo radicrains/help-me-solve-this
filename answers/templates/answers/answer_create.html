@@ -8,14 +8,14 @@
 <body class="blue-grey darken-4">
     <div class="container grey lighten-3">
         <div class="row section">
-            <small><a href="{% url 'questions:questions_index' %}" class="btn btn-primary btn-sm grey"><i class="small material-icons">navigate_before</i></a></small>
+            <small><a href="{% url 'questions:questions_index' %}" class="btn grey"><i class="small material-icons">navigate_before</i></a></small>
         </div>
         <div class="row">
             <div class="col s6 offset-s3">
                 <div class="row">
                     <div class="left">
                         <h4>{{question.title | capfirst}}</h4>
-                        <p><small>This question was asked by {{question.user.username}}</small></p>
+                        <p>Question asked by: {{question.user.username | capfirst}} | Created on: {{question.created_at}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -27,10 +27,9 @@
             </div>
         </div>
         <div class="divider"></div>
+       
         <div class="row section">
-            
-        </div>
-        <div class="row section">
+            <small><a href="{% url 'questions:question_show' question.id %}" class="btn grey left"><i class="material-icons">cancel</i></a></small>
             <div class="col s6 offset-s3">
                 <form action="{% url 'answers:question_answer' question.id %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -40,12 +39,13 @@
                         <p class="help">{{ field.help_text|safe }}</p>
                     {% endif %}
 
-                    <button type="submit" class="btn btn-primary btn-sm"><i class="tiny material-icons left">insert_comment</i>Post Reply</button>
-                    <a class="btn btn-primary btn-sm" href="{% url 'questions:question_show' question.id %}"><i class="small material-icons left">undo</i>Close Reply</a>
+                    <button type="submit" class="btn pink"><i class="tiny material-icons left">insert_comment</i>Post Reply</button>
                 </form>
             </div>
-            
         </div>
+        
+        <div class="row section"></div>
+        <div class="divider"></div>
     </div>
 </body>
 
