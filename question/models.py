@@ -31,10 +31,14 @@ class Question(models.Model):
     user = models.ForeignKey(User, default='', null=True, related_name='user_posts', on_delete=models.CASCADE)
    
     categories = models.ManyToManyField(Category, related_name='category_name')
+    likes = models.ManyToManyField(User, related_name='qns_post')
 
     # meta information
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.title

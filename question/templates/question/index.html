@@ -5,9 +5,9 @@
 
 {% block body %}
 
-{% if request.user.is_superuser %}
+{% comment %} {% if request.user.is_superuser %}
 Only Admins can see this
-{% endif %}
+{% endif %} {% endcomment %}
 
 <body class="blue-grey darken-4">
     <div class="container">
@@ -17,7 +17,7 @@ Only Admins can see this
                 <div class="card center small ">
                     <div class="card-image">
                         <a href="{% url 'questions:question_show' question.id %}">
-                            <img src="{{question.cover.url}}" class="card-img-top" />
+                            <img class="responsive-img" src="{{question.cover.url}}" class="card-img-top" />
                         </a>
                     </div>
                     <div class="card-content">
@@ -25,14 +25,12 @@ Only Admins can see this
                     </div>
                     <div class="card-action">
                         {% for cat in question.categories.all %}
-                            <div class="left chip teal lighten-5">{{cat.name}}</div>
+                           <div class="left chip teal lighten-5">{{cat.name}}</div>
                         {% endfor %}
                         <div class="right chip teal lighten-5">{{question.user}}</div>
                     </div>
                 </div>
             </div>
-
-
             {% empty %}
             <div class="alert alert-warning">
                 No questions yet

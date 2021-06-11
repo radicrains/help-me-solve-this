@@ -9,7 +9,7 @@
         <div class="row section">
             <small><a href="{% url 'questions:questions_index' %}" class="btn btn-primary btn-sm grey"><i class="small material-icons">navigate_before</i></a></small>
         </div>
-        <div class="row section">
+        <div class="row ">
             <div class="col s6 offset-s3">
                 <div class="row">
                     <div class="left">
@@ -17,18 +17,36 @@
                         <p><small>This question was asked by {{question.user.username}}</small></p>
                     </div>
                 </div>
-                <div class="row">
-                <img src="{{question.cover.url}}" />
+                <div class="row center">
+                    <img class="responsive-img" src="{{question.cover.url}}" />
                 </div>
                 <div class="row">
                     {{question.description}}
                 </div>
-                <div class="right">
-                    {% if request.user.is_superuser %}
-                    <small><a href="{% url 'questions:question_show' question.id %}?action=del"><i class="tiny material-icons">delete</i>Delete</a></small>
+                <div class="row">
+                <div class="left">
+                    {% if question.user == request.user or request.user.is_superuser%}
+                    <a href="{% url 'questions:question_show' question.id %}?action=edit" class="btn btn-primary btn-sm transparent z-depth-0 teal-text"><i class="tiny material-icons left">edit</i>Edit</a>
                     {% endif %}
-                    <small><a href="{% url 'questions:question_show' question.id %}?action=edit"><i class="tiny material-icons">edit</i>Edit</a></small>
-                    <small><a href="{% url 'answers:question_answer' question.id %}"><i class="tiny material-icons">insert_comment</i>ReplyPost</a></small>
+
+                    {% if request.user.is_superuser %}
+                    <a href="{% url 'questions:question_show' question.id %}?action=del" class="btn btn-primary btn-sm transparent z-depth-0 teal-text"><i class="tiny material-icons left">delete</i>Delete</a>
+                    {% endif %}
+                </div>
+                <div class="right">
+                    <a href="{% url 'answers:question_answer' question.id %}" class="btn btn-primary btn-sm transparent z-depth-0 teal-text"><i class="tiny material-icons left">insert_comment</i>REPLYPOST</a>
+                    <form action="{% url 'questions:like_question' question.id %}" method="POST">
+                        {% csrf_token %}
+
+                        {% if liked %}
+                            <button type="submit" name="qns_id" value="{{question.id}}" 
+                                class="btn btn-primary btn-sm transparent z-depth-0 red-text">UNLIKED</button> 
+                        {% else %}
+                            <button type="submit" name="qns_id" value="{{question.id}}" 
+                                class="btn btn-primary btn-sm transparent z-depth-0 teal-text">LIKE</button>
+                        {% endif %}    
+                        - {{question.total_likes}} Likes
+                    </form> 
                 </div>
             </div>
         </div>
@@ -50,6 +68,7 @@
         {% endif %}
 
         <div class="divider"></div>
+        
         <div class="row section grey lighten-3">
             <div class="col s6 offset-s3">
                 {% for ans in answers %}
@@ -59,7 +78,8 @@
                             {{ans.name.username}}
                         </div>
                         <div class="row">{{ans.answer}}</div>
-                        <div class="row"><img src="{{ans.ansimg.url}}"/></div>
+                        <div class="row"><a href="{{ans.ansimg.url}}"><img class="responsive-img" src="{{ans.ansimg.url}}"/></a></div>
+                       
                     </div>
                     <div class="divider"></div>
                 {% endfor %}
