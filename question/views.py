@@ -84,6 +84,14 @@ def view_show(request, pk):
 
 
 @login_required
+def view_qns_by_user(request):
+    userQuestions = Question.objects.filter(user_id=request.user)
+    print(userQuestions)
+    context ={"userQuestions":userQuestions}
+    return render(request, 'question/user_show.html', context)
+
+
+@login_required
 @user_passes_test(lambda u: u.is_superuser, login_url='/login/', redirect_field_name='/posts/')
 def view_category(request):
 
