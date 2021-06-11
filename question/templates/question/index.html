@@ -21,13 +21,13 @@ Only Admins can see this
                         </a>
                     </div>
                     <div class="card-content">
-                        {{question.title}}
+                        {{question.title | capfirst}}
                     </div>
                     <div class="card-action">
                         {% for cat in question.categories.all %}
-                           <div class="left chip teal lighten-5">{{cat.name}}</div>
+                           <div class="left chip teal lighten-5">{{cat.name | capfirst}}</div>
                         {% endfor %}
-                        <div class="right chip teal lighten-5">{{question.user}}</div>
+                        <div class="right chip teal lighten-5">{{question.user | capfirst}}</div>
                     </div>
                 </div>
             </div>
