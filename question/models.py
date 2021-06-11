@@ -31,7 +31,7 @@ class Question(models.Model):
     user = models.ForeignKey(User, default='', null=True, related_name='user_posts', on_delete=models.CASCADE)
    
     categories = models.ManyToManyField(Category, related_name='category_name')
-    # likes = models.ManyToManyField(User, default=False, related_name='qns_post')
+    likes = models.ManyToManyField(User, default=False, related_name='qns_post')
 
     # meta information
     created_at = models.DateTimeField(auto_now_add=True)
