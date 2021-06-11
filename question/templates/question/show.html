@@ -79,32 +79,11 @@
                         </div>
                         <div class="row">{{ans.answer}}</div>
                         <div class="row"><a href="{{ans.ansimg.url}}"><img class="responsive-img" src="{{ans.ansimg.url}}"/></a></div>
-                        <a href="{% url 'answers:answer_edit' ans.id %}" class="btn btn-primary btn-sm transparent z-depth-0 teal-text"><i class="tiny material-icons left">edit</i>Edit Reply</a>
-                    {{ans.id}}
                     </div>
                     <div class="divider"></div>
                 {% endfor %}
             </div>
         </div>
-
-        {% comment %} {% if edit_reply %}
-            <div class="row section grey lighten-3">
-                <div class="divider"></div>
-                <div class="row section">
-                    <div class="col s6 offset-s3">
-                    
-                        <form action="{% url 'answers:answer_edit' ans.id %}?action=edit_reply" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{form|materializecss}}
-                            <button class="btn btn-primary btn-sm"><i class="tiny material-icons left">mode_edit</i>Edit Reply</button>
-                            <a class="btn btn-primary btn-sm" href="{% url 'questions:question_show' question.id %}"><i class="tiny material-icons left">undo</i>Close Edit</a>
-                        </form> 
-                    </div>
-                </div>
-            </div>
-        {% endif %} {% endcomment %}
-
-
     </div>
 </body>
 
