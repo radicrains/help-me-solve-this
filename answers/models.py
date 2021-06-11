@@ -19,6 +19,8 @@ class Answer(models.Model):
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name='answers_qn')
 
+    verify = models.ManyToManyField(User, related_name='ans_post')
+
     def serialize(self):
         return {
             "id": self.id,

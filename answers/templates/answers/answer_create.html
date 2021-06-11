@@ -10,7 +10,7 @@
         <div class="row section">
             <small><a href="{% url 'questions:questions_index' %}" class="btn btn-primary btn-sm grey"><i class="small material-icons">navigate_before</i></a></small>
         </div>
-        <div class="row section">
+        <div class="row">
             <div class="col s6 offset-s3">
                 <div class="row">
                     <div class="left">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <img src="{{question.cover.url}}" />
+                    <img class="responsive-img" src="{{question.cover.url}}" />
                 </div>
                 <div class="row">
                     {{question.description}}
