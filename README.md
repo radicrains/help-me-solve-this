@@ -43,9 +43,9 @@ This application is built with Django, Html, PostgreSQL and Materialize
 - Materialize
 
 ## PROJECT MANAGEMENT, WIREFRAME & SCREENSHOTS
-- [Project To-do](https://mathshero.herokuapp.com/)
-- [Wireframe](https://mathshero.herokuapp.com/)
-- [Screenshots](https://mathshero.herokuapp.com/)
+- [Project To-do](https://github.com/radicrains/help-me-solve-this/projects)
+- [Wireframe](https://drive.google.com/file/d/1JP-1glPPEHVSNaCXO-WZ3D35v69rFnVE/view?usp=sharing)
+- [Screenshots](https://drive.google.com/file/d/1HP_MgBAnq5BnDDbKJ3gEZw_c4K0mYRFG/view?usp=sharing)
 
 ## FUTURE DEVELOPMENTS
 - Fix Like Model
